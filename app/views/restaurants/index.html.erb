@@ -1,11 +1,12 @@
-<h1>Listing Restaurants</h1>
- 
-<table>
+<h1>Restaurants Directory</h1>
+<%= link_to 'Add New Restaurant', new_restaurant_path %>
+
+<table cellspacing="15">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Address</th>
-    <th>Phone Number</th>
+    <th>Name   </th>
+    <th>Description   </th>
+    <th>Address   </th>
+    <th>Phone Number   </th>
   </tr>
  
   <% @restaurants.each do |restaurant| %>
