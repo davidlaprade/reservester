@@ -3,6 +3,8 @@ class Restaurant < ActiveRecord::Base
 	validates :description, presence:true,
 							length: {minimum: 5}
 	validates :address, presence:true
-	validates :phone, presence:true
+	validates :phone, presence:true,
+					  format: { with: /\d\d\d-\d\d\d-\d\d\d\d/, message: "Must be in xxx-xxx-xxxx format"}
+					  #makes sure the phone number is in xxx-xxx-xxxx format
 
 end
