@@ -2,6 +2,10 @@ class RestaurantsController < ApplicationController
 	def new
 	end
 
+	def index
+		@restaurants = Restaurant.all
+	end
+
 	def create
 		@restaurant = Restaurant.new(restaurant_params)
 
