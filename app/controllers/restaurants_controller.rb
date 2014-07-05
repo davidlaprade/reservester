@@ -6,7 +6,7 @@ class RestaurantsController < ApplicationController
 	def update
   		@restaurant = Restaurant.find(params[:id])
  
-  		if @restaurant.update(article_params)
+  		if @restaurant.update(restaurant_params)
     		redirect_to @restaurant
  	 	else
     	render 'edit'
