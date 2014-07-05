@@ -3,10 +3,10 @@
 
 <table cellspacing="15">
   <tr>
-    <th>Name   </th>
-    <th>Description   </th>
-    <th>Address   </th>
-    <th>Phone Number   </th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Address</th>
+    <th>Phone Number</th>
   </tr>
  
   <% @restaurants.each do |restaurant| %>
@@ -15,6 +15,10 @@
       <td><%= restaurant.description %></td>
       <td><%= restaurant.address %></td>
       <td><%= restaurant.phone %></td>
+      <td><%= link_to 'Show', restaurant_path(restaurant) %></td>
+      <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
+      <td><%= link_to 'Destroy', restaurant_path(restaurant),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
