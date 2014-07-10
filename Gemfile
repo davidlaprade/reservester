@@ -34,6 +34,9 @@ gem 'spring',        group: :development
 
 gem 'rspec-rails', '~> 3.0.0'
 
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 # Use unicorn as the app server
 # gem 'unicorn'
 
