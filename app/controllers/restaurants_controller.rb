@@ -13,7 +13,6 @@ before_action :authenticate_user!, except: [:index, :show]
  	 	else
     	render 'edit'
   	end
-	end
 
 	def edit
 		@restaurant = Restaurant.find(params[:id])
@@ -45,7 +44,9 @@ before_action :authenticate_user!, except: [:index, :show]
 
 	private
 		def restaurant_params
-			params.require(:restaurant).permit(:name, :description, :address, :phone, :zip_cod)
+			params.require(:restaurant).permit(:name, :description, :address, :phone)
 		end
+
+	end
 
 end
