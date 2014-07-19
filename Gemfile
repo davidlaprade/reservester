@@ -45,3 +45,4 @@ gem 'mysql2'
 gem 'better_errors'
 
 gem 'carrierwave'
+gem 'rmagick'
