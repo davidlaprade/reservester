@@ -22,6 +22,8 @@
         <td><%= restaurant.address %></td>
         <td><%= restaurant.phone %></td>
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      restaurant_path(restaurant), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
