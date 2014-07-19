@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704154135) do
+ActiveRecord::Schema.define(version: 20140719170142) do
 
   create_table "restaurants", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "address"
-    t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name",        limit: 30
+    t.string "description", limit: 140
+    t.string "address",     limit: 140
+    t.string "phone",       limit: 12
+    t.string "image"
   end
 
 end
