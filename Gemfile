@@ -47,4 +47,5 @@ gem 'better_errors'
 gem 'carrierwave'
 gem 'rmagick'
 
+gem 'devise'
 
