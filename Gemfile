@@ -49,3 +49,6 @@ gem 'rmagick'
 
 gem 'devise'
 
+# let's you still use attribute accessor from your models
+# gem 'protected_attributes'
+

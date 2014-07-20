@@ -50,19 +50,15 @@
           </a>
           <a class="brand" href="#">Reservester</a>
           <div class="container-fluid nav-collapse">
-           <ul class="nav">
-              
+           <ul class="nav">        
               <% if !owner_signed_in? -%>
                 <li><%= link_to "Sign in", new_owner_session_path  %></li>
+                <li><%= link_to "Create Account", new_owner_registration_path  %></li>
               <% end -%>
-
               <% if owner_signed_in? -%>
                 <li><%= link_to "Log out", destroy_owner_session_path, :method => :delete,
                               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%></li>
               <% end -%>
-
-
-
               <!-- <li><%= link_to "Sign in", new_owner_session_path  %></li> -->
               <!-- <li><%= link_to "Log out", destroy_owner_session_path, :method => :delete %></li> -->
             </ul>
