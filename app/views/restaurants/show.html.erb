@@ -7,6 +7,8 @@
   <dd><%= image_tag @restaurant.image_url(:masthead).to_s %></dd>
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @restaurant.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
+  <dd><%= @restaurant.created_by %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @restaurant.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>

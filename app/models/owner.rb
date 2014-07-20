@@ -4,5 +4,8 @@ class Owner < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_uniqueness_of :name
+  validates_presences_of :name
+
   has_many :restaurants, dependent: :destroy
 end

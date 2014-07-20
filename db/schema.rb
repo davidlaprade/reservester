@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720191227) do
+ActiveRecord::Schema.define(version: 20140720195218) do
 
   create_table "owners", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140720191227) do
     t.string "address",     limit: 140
     t.string "phone",       limit: 12
     t.string "image"
+    t.string "created_by"
   end
 
 end

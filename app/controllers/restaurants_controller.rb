@@ -3,20 +3,31 @@ class RestaurantsController < ApplicationController
 
 	def new
 		@restaurant = Restaurant.new
+		@restaurant.created_by = current_owner.name
 	end
 
 	def update
   		@restaurant = Restaurant.find(params[:id])
  
-  		if @restaurant.update(restaurant_params)
+  		if !(current_owner.name == @restaurant.created_by)
+			redirect_to restaurants_path, notice: 'Not your restaurant!'
+		else 
+			if @restaurant.update(restaurant_params)
     		redirect_to @restaurant
- 	 	else
-    	render 'edit'
-  	end
+ 	 		else
+    		render 'edit'
+    		end
+  		end
 	end
 
 	def edit
 		@restaurant = Restaurant.find(params[:id])
+
+		if !(current_owner.name == @restaurant.created_by)
+			redirect_to restaurants_path, notice: 'Not your restaurant!'
+		else
+			render 'edit'
+		end
 	end
 
 	def index
@@ -25,6 +36,8 @@ class RestaurantsController < ApplicationController
 
 	def create
 		@restaurant = Restaurant.new(restaurant_params)
+		#emails are required to be unique
+		@restaurant.created_by = current_owner.name
 
 		if @restaurant.save
 			redirect_to @restaurant
@@ -35,17 +48,24 @@ class RestaurantsController < ApplicationController
 
 	def show
 		@restaurant = Restaurant.find(params[:id])
+		@restaurant.created_by = current_owner.name
 	end
 
 	def destroy
 		@restaurant = Restaurant.find(params[:id])
-		@restaurant.destroy
-		redirect_to restaurants_path
+		
+		if !(current_owner.name == @restaurant.created_by)
+			puts 'Not your restaurant!'
+			redirect_to restaurants_path
+		else
+			@restaurant.destroy
+			redirect_to restaurants_path
+		end
 	end
 
 	private
 		def restaurant_params
-			params.require(:restaurant).permit(:name, :description, :address, :phone, :image)
+			params.require(:restaurant).permit(:name, :description, :address, :phone, :image, :created_by)
 		end
 
 end
