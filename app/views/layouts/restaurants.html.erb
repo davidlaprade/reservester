@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Reservester" %></title>
+
+
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -49,8 +51,20 @@
           <a class="brand" href="#">Reservester</a>
           <div class="container-fluid nav-collapse">
            <ul class="nav">
-              <li><%= link_to "Sign in", new_owner_session_path  %></li>
-              <li><%= link_to "Log out", destroy_owner_session_path  %></li>
+              
+              <% if !owner_signed_in? -%>
+                <li><%= link_to "Sign in", new_owner_session_path  %></li>
+              <% end -%>
+
+              <% if owner_signed_in? -%>
+                <li><%= link_to "Log out", destroy_owner_session_path, :method => :delete,
+                              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%></li>
+              <% end -%>
+
+
+
+              <!-- <li><%= link_to "Sign in", new_owner_session_path  %></li> -->
+              <!-- <li><%= link_to "Log out", destroy_owner_session_path, :method => :delete %></li> -->
             </ul>
           </div><!--/.nav-collapse -->
         </div>
