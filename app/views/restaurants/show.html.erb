@@ -18,10 +18,15 @@
 </dl>
 
 <div class="form-actions">
-  <%= link_to t('Book Table'),
-              new_reservation_path, :class => 'btn'  %>
+  <% if !(current_owner.present?) || !(current_owner.name == @restaurant.created_by) -%>
+    <%= link_to t('Book Table'),
+                new_restaurant_reservation_path(@restaurant), :class => 'btn'  %>
+  <% end -%>
+
   <%= link_to t('home'),
               restaurants_path, :class => 'btn'  %>
+
+  <% if (current_owner.present?) && (restaurant.created_by.present?) && (current_owner.name == restaurant.created_by) -%>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_restaurant_path(@restaurant), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -29,4 +34,6 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+  <% end -%>
+
 </div>

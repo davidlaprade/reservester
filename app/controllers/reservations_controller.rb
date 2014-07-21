@@ -1,7 +1,10 @@
 class ReservationsController < ApplicationController
 
+before_filter :assign_restaurant
+
 	def new
 		@reservation = Reservation.new
+
 	end
 
 	def create
@@ -17,6 +20,10 @@ class ReservationsController < ApplicationController
 	private
 		def reservation_params
 			params.require(:reservation).permit(:name, :at_restaurant, :time, :date)
+		end
+
+		def assign_restaurant
+			@restaurant = Restaurant.find(params[:restaurant_id])
 		end
 
 

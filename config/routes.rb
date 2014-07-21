@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  # Example resource route with sub-resources:
+    resources :restaurants do
+      resources :reservations
+    end
+
   devise_for :owners
-  resources :restaurants, :owners, :reservations
+  resources :owners
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -30,11 +35,7 @@ Rails.application.routes.draw do
   #     end
   #   end
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

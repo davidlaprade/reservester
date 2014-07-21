@@ -9,7 +9,7 @@ class Restaurant < ActiveRecord::Base
 
 	# validates_presence_of :owner
 	belongs_to :owner
-	has_many :reservations
+	has_many :reservations, dependent: :destroy
 
 	mount_uploader :image, ImageUploader
 
