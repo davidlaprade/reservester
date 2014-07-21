@@ -31,6 +31,7 @@ class RestaurantsController < ApplicationController
 	end
 
 	def index
+		# raise current_owner.inspect
 		@restaurants = Restaurant.all
 	end
 
