@@ -19,6 +19,29 @@
   <dd><%= @restaurant.phone %></dd>
 </dl>
 
+<% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= %></th>
+        <th><%= model_class.human_attribute_name(:name_of_guests) %></th>
+        <th><%= model_class.human_attribute_name(:time) %></th>
+        <th><%= model_class.human_attribute_name(:date) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.name %></td>
+          <td><%= reservation.time %></td>
+          <td><%= reservation.date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end -%>
+
 <div class="form-group">
     <label class="col-sm-2 control-label">Find us on the map!</label>
     <div class="col-sm-10">

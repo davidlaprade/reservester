@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
 
+# so that I don't have to write @restaurant = Restaurant.find(params[:restaurant_id]) each time
+# I want this variable each time I'm creating a reservation
 before_filter :assign_restaurant
 
 	def new

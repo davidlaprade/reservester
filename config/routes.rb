@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  # Example resource route with sub-resources:
+  # Made reservations a sub-resource of restaurants
+  # I will only ever go to a reservation when there is a restaurant it is for
+  # Allows me to access restaurant class variables from reservation views
+  # This will change the routes accordingly
     resources :restaurants do
       resources :reservations
     end
