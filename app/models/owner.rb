@@ -5,7 +5,8 @@ class Owner < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_uniqueness_of :name
-  validates_presences_of :name
+  validates_presence_of :name
+  validates_presence_of :email
 
   has_many :restaurants, dependent: :destroy
 end

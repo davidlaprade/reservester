@@ -36,7 +36,7 @@ class RestaurantsController < ApplicationController
 
 	def create
 		@restaurant = Restaurant.new(restaurant_params)
-		#emails are required to be unique
+		#names are required to be unique by model validation
 		@restaurant.created_by = current_owner.name
 
 		if @restaurant.save
@@ -48,7 +48,6 @@ class RestaurantsController < ApplicationController
 
 	def show
 		@restaurant = Restaurant.find(params[:id])
-		@restaurant.created_by = current_owner.name
 	end
 
 	def destroy
