@@ -1,11 +1,13 @@
 <%- model_class = Restaurant -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '@restaurant.name', :default => model_class.human_attribute_name(@restaurant.name).titleize %></h1>
 </div>
 
+<%= image_tag @restaurant.image_url(:masthead).to_s %>
+
 <dl class="dl-horizontal">
-  <dd><%= image_tag @restaurant.image_url(:masthead).to_s %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd></dd>
+  <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
   <dd><%= @restaurant.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
   <dd><%= @restaurant.created_by %></dd>
@@ -13,9 +15,22 @@
   <dd><%= @restaurant.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd><%= @restaurant.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
   <dd><%= @restaurant.phone %></dd>
 </dl>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">Find us on the map!</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">
+        <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=400x400&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}"
+        %>
+      </p>
+    </div>
+  </div>
+
+
+
 
 <div class="form-actions">
   <% if !(current_owner.present?) || !(current_owner.name == @restaurant.created_by) -%>
@@ -26,7 +41,7 @@
   <%= link_to t('home'),
               restaurants_path, :class => 'btn'  %>
 
-  <% if (current_owner.present?) && (restaurant.created_by.present?) && (current_owner.name == restaurant.created_by) -%>
+  <% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_restaurant_path(@restaurant), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

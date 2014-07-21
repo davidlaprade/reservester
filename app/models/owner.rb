@@ -9,4 +9,5 @@ class Owner < ActiveRecord::Base
   validates_presence_of :email
 
   has_many :restaurants, dependent: :destroy
+  
 end
