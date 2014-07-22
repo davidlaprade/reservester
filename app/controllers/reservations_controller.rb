@@ -11,18 +11,19 @@ before_filter :assign_restaurant
 
 	def create
 		@reservation = Reservation.new(reservation_params)
-		@reservation.at_restaurant = @restaurant.name
 		@reservation.restaurant_id = @restaurant.id
 
 		if @reservation.save
 			redirect_to @restaurant
+		else
+			render 'new'
 		end
 	end
 
 
 	private
 		def reservation_params
-			params.require(:reservation).permit(:email, :at_restaurant, :time_and_date, :message, :restaurant_id)
+			params.require(:reservation).permit(:email, :time_and_date, :message, :restaurant_id)
 		end
 
 		def assign_restaurant
