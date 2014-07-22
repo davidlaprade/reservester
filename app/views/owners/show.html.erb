@@ -1,0 +1,17 @@
+<%- model_class = Owner -%>
+<div class="page-header">
+  <h1><%=t '@owner.name', :default => model_class.human_attribute_name(@owner.name).titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dd></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @owner.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @owner.email %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('home'),
+              restaurants_path, :class => 'btn'  %>
+</div>
