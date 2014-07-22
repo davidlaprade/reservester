@@ -20,26 +20,40 @@
 </dl>
 
 <% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><%= %></th>
-        <th><%= model_class.human_attribute_name(:name_of_guests) %></th>
-        <th><%= model_class.human_attribute_name(:time) %></th>
-        <th><%= model_class.human_attribute_name(:date) %></th>
-        <th><%=t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @reservations.each do |reservation| %>
+  <% if (@reservation == nil) -%>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td><%= reservation.name %></td>
-          <td><%= reservation.time %></td>
-          <td><%= reservation.date %></td>
+          <th><%= model_class.human_attribute_name(:Reservations) %></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <tr>
+          <td>You have no reservations<td>
+        </tr>
+      </tbody>
+    </table>
+  <% end -%>
+  <% if !(@reservation == nil) -%>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:name_of_guests) %></th>
+          <th><%= model_class.human_attribute_name(:time) %></th>
+          <th><%= model_class.human_attribute_name(:date) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.name %></td>
+            <td><%= reservation.time %></td>
+            <td><%= reservation.date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end -%>
 <% end -%>
 
 <div class="form-group">

@@ -53,7 +53,7 @@ class RestaurantsController < ApplicationController
 		# only want to store reservations which were created at this restaurant to this variable
 		# see "Rails Guides--Active Record Querying" for how this works
 		@restaurant_name = Restaurant.find_by id: @restaurant
-		@reservations = Reservation.find_each at_restaurant: @restaurant_name.name
+		@reservations = Reservation.where(at_restaurant: @restaurant_name.name)
 
 	end
 

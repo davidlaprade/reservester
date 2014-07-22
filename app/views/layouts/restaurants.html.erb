@@ -56,7 +56,7 @@
                 <li><%= link_to "Create Account", new_owner_registration_path  %></li>
               <% end -%>
               <% if owner_signed_in? -%>
-                <li><%= link_to "View Account", new_owner_registration_path  %></li>
+                <li><%= link_to "View Account", owner_path  %></li>
                 <li><%= link_to "Log out", destroy_owner_session_path, :method => :delete,
                               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%></li>
               <% end -%>
