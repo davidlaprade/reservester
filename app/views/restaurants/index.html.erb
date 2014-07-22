@@ -28,7 +28,7 @@
             <% if (current_owner.present?) && (restaurant.created_by.present?) && (current_owner.name == restaurant.created_by) -%>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            <%= link_to t('delete'),
                         restaurant_path(restaurant),
                         :method => :delete,
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
@@ -40,6 +40,8 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_restaurant_path,
-            :class => 'btn btn-primary' %>
+<% if owner_signed_in? -%>
+  <%= link_to t('Create_new_restaurant'),
+              new_restaurant_path,
+              :class => 'btn btn-primary' %>
+<% end -%>

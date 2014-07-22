@@ -20,7 +20,8 @@
 </dl>
 
 <% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
-  <% if (@reservation == nil) -%>
+  <h3> Reservations </h3>
+  <% if (@reservation.present?) -%>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -34,21 +35,21 @@
       </tbody>
     </table>
   <% end -%>
-  <% if !(@reservation == nil) -%>
+  <% if !(@reservation.present?) -%>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th><%= model_class.human_attribute_name(:name_of_guests) %></th>
-          <th><%= model_class.human_attribute_name(:time) %></th>
-          <th><%= model_class.human_attribute_name(:date) %></th>
+          <th><%= model_class.human_attribute_name(:email) %></th>
+          <th><%= model_class.human_attribute_name(:time_and_date) %></th>
+          <th><%= model_class.human_attribute_name(:message) %></th>
         </tr>
       </thead>
       <tbody>
         <% @reservations.each do |reservation| %>
           <tr>
-            <td><%= reservation.name %></td>
-            <td><%= reservation.time %></td>
-            <td><%= reservation.date %></td>
+            <td><%= reservation.email %></td>
+            <td><%= reservation.time_and_date %></td>
+            <td><%= reservation.message %></td>
           </tr>
         <% end %>
       </tbody>
@@ -56,8 +57,8 @@
   <% end -%>
 <% end -%>
 
+<h4> Find us on the map! </h4>
 <div class="form-group">
-    <label class="col-sm-2 control-label">Find us on the map!</label>
     <div class="col-sm-10">
       <p class="form-control-static">
         <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=400x400&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}"
