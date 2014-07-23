@@ -60,7 +60,7 @@ class RestaurantsController < ApplicationController
 	def destroy
 		@restaurant = Restaurant.find(params[:id])
 		
-		if !(current_owner.name == @restaurant.created_by)
+		if !(current_owner.id == @restaurant.owner_id)
 			puts 'Not your restaurant!'
 			redirect_to restaurants_path
 		else
