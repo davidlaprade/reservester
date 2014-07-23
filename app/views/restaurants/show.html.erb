@@ -3,6 +3,8 @@
   <h1><%=t '@restaurant.name', :default => model_class.human_attribute_name(@restaurant.name).titleize %></h1>
 </div>
 
+
+
 <%= image_tag @restaurant.image_url(:masthead).to_s %>
 
 <dl class="dl-horizontal">
@@ -10,7 +12,7 @@
   <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
   <dd><%= @restaurant.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
-  <dd><%= @restaurant.created_by %></dd>
+  <dd><%= Owner.find_by_id(@restaurant.owner_id).name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @restaurant.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
@@ -19,14 +21,12 @@
   <dd><%= @restaurant.phone %></dd>
 </dl>
 
-<% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
+<% if (current_owner.present?) && (@restaurant.owner_id.present?) && (current_owner.id == @restaurant.owner_id) -%>
   <h3> Reservations </h3>
-  <% if (@reservation.present?) -%>
+  <% if !(@reservations.present?) -%>
     <table class="table table-striped">
       <thead>
-        <tr>
-          <th><%= model_class.human_attribute_name(:Reservations) %></th>
-        </tr>
+        <tr></tr>
       </thead>
       <tbody>
         <tr>
@@ -35,7 +35,7 @@
       </tbody>
     </table>
   <% end -%>
-  <% if !(@reservation.present?) -%>
+  <% if (@reservations.present?) -%>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -75,11 +75,8 @@
     </div>
   </div>
 
-
-
-
 <div class="form-actions">
-  <% if !(current_owner.present?) || !(current_owner.name == @restaurant.created_by) -%>
+  <% if !(current_owner.present?) || !(current_owner.id == @restaurant.owner_id) -%>
     <%= link_to t('Book Table'),
                 new_restaurant_reservation_path(@restaurant), :class => 'btn'  %>
   <% end -%>
@@ -87,7 +84,7 @@
   <%= link_to t('home'),
               restaurants_path, :class => 'btn'  %>
 
-  <% if (current_owner.present?) && (@restaurant.created_by.present?) && (current_owner.name == @restaurant.created_by) -%>
+  <% if (current_owner.present?) && (@restaurant.owner_id.present?) && (current_owner.id == @restaurant.owner_id) -%>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_restaurant_path(@restaurant), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -98,3 +95,6 @@
   <% end -%>
 
 </div>
+
+
+
