@@ -36,9 +36,9 @@ class RestaurantsController < ApplicationController
 	end
 
 	def create
-		@restaurant = Restaurant.new(restaurant_params)
-		#names are required to be unique by model validation
-		@restaurant.created_by = current_owner.name
+		@restaurant = current_owner.restaurants.create
+		# @restaurant = Restaurant.new(restaurant_params)
+		# @restaurant.owner_id = current_owner.id
 
 		if @restaurant.save
 			redirect_to @restaurant
@@ -49,10 +49,11 @@ class RestaurantsController < ApplicationController
 
 	def show
 		@restaurant = Restaurant.find(params[:id])
+		@reservations = @restaurant.reservations
 		
 		# only want to store reservations which were created at this restaurant to this variable
 		# see "Rails Guides--Active Record Querying" for how this works
-		@reservations = Reservation.where(restaurant_id: @restaurant)
+		# @reservations = Reservation.where(restaurant_id: @restaurant)
 
 	end
 

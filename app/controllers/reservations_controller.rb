@@ -20,6 +20,14 @@ before_filter :assign_restaurant
 		end
 	end
 
+	def destroy
+		@restaurant = current_owner.restaurants.find_by_id(delete_params[:restaurant_id])
+		@reservation = @restaurant.reservations.find_by_id(delete_params[:id])
+		
+		@reservation.delete
+		redirect_to restaurant_path(@restaurant.id)
+	end
+
 
 	private
 		def reservation_params
@@ -30,5 +38,8 @@ before_filter :assign_restaurant
 			@restaurant = Restaurant.find(params[:restaurant_id])
 		end
 
+		def delete_params
+			params.permit(:restaurant_id, :id)
+		end
 
 end
