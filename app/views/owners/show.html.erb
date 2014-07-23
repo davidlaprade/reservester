@@ -9,6 +9,13 @@
   <dd><%= @owner.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
   <dd><%= @owner.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
+	<% @owner.restaurants.each do |restaurant| %>
+          <tr>
+            <dt></dt>
+            <dd><%= restaurant.name %></dd>
+          </tr>
+    <% end %>
 </dl>
 
 <div class="form-actions">
