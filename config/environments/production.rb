@@ -11,7 +11,7 @@ Rails.application.configure do
   config.eager_load = true
 
 # for Devise:
-  config.action_mailer.default_url_options = { host: '[insert URL of Heroku App here]' }
+  config.action_mailer.default_url_options = { host: 'http://young-sierra-4621.herokuapp.com/' }
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
