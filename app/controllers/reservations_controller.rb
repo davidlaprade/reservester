@@ -14,7 +14,8 @@ before_filter :assign_restaurant
 		@reservation.restaurant_id = @restaurant.id
 
 		if @reservation.save
-			redirect_to @restaurant
+			Reservationnotifier.send_reservation_email
+			redirect_to(@restaurant, notice: "Reservation created!")
 		else
 			render 'new'
 		end
