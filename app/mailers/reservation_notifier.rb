@@ -1,12 +1,13 @@
 class ReservationNotifier < ActionMailer::Base
 
-  default :from => 'dlaprade@friars.providence.edu'
+  default :from => 'admin@reservester.com'
 
   # send an email to the user when he/she creates a new reservation
   def send_reservation_email(reservation)
     @reservation = reservation
-    mail( :to => @reservation.email,
-    :subject => 'Thanks for signing up for our amazing app' )
+    @owner = Owner.find_by_id(Restaurant.find_by_id(@reservation.restaurant_id).owner_id)
+    mail( :to => @owner.email,
+    :subject => 'You have a new reservation at #{ Restaurant.find_by_id(@reservation.restaurant_id).name }' )
   end
 
   private

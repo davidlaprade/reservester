@@ -49,6 +49,8 @@ gem 'rmagick'
 
 gem 'devise'
 
+gem 'mailcatcher'
+
 # let's you still use attribute accessor from your models
 # gem 'protected_attributes'
 
