@@ -1,10 +1,13 @@
+<!DOCTYPE html>
+<html>
 <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
     <h1>Someone made a reservation!</h1>
-    <p> Reservation was made at #{Restaurant.find_by_id(@reservation.id).name} </p>
-    <p> Email on the reservation is #{@reservation.email} </p>
-    <p> Reservation date/time is #{@reservation.time_and_date} </p>
-    <p> Reservation message #{@reservation.message} </p>
+    <p> Reservation was made at <%= Restaurant.find_by_id(@reservation.id).name %> </p>
+    <p> Email on the reservation is <%= {@reservation.email %> </p>
+    <p> Reservation date/time is <%= @reservation.time_and_date %> </p>
+    <p> Reservation message <%= @reservation.message %> </p>
   </body>
+ </html>

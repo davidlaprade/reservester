@@ -1,0 +1,7 @@
+Someone made a reservation!
+====================================================
+
+Reservation was made at <%= Restaurant.find_by_id(@reservation.id).name %>
+Email on the reservation is <%= @reservation.email %>
+Reservation date/time is <%= @reservation.time_and_date %>
+Reservation message <%= @reservation.message} %>
