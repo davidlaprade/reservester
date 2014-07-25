@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   devise_for :owners
   resources :owners
 
+# adds a dashboard route
+# see http://guides.rubyonrails.org/routing.html section 3.6
+  get 'dashboard5', to: 'owners#dashboard', as: 'dashboard'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

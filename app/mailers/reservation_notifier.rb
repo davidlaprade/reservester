@@ -9,9 +9,4 @@ class ReservationNotifier < ActionMailer::Base
     mail( :to => @owner.email, :subject => "You have a new reservation at #{Restaurant.find_by_id(@reservation.restaurant_id).name}" )
   end
 
-  private
-	def mailer_params
-	  params.permit(:id)
-	end
-
 end
