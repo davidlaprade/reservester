@@ -51,6 +51,8 @@ gem 'devise'
 
 gem 'mailcatcher'
 
+gem "recaptcha", :require => "recaptcha/rails"
+
 # let's you still use attribute accessor from your models
 # gem 'protected_attributes'
 

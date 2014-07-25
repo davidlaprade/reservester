@@ -12,6 +12,14 @@ before_filter :assign_restaurant
 	def create
 		@reservation = Reservation.new(reservation_params)
 		@reservation.restaurant_id = @restaurant.id
+		# captcha_message = 'That is not what the picture contains!'
+
+		# if verify_recaptcha(model: @reservation, message: captcha_message)
+		# 	@reservation.save
+		# 	redirect_to(@restaurant, notice: "Reservation created!")
+		# else
+		# 	render 'new'
+		# end
 
 		if @reservation.save
 			ReservationNotifier.send_reservation_email(@reservation).deliver
