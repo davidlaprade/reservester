@@ -6,8 +6,7 @@ class ReservationNotifier < ActionMailer::Base
   def send_reservation_email(reservation)
     @reservation = reservation
     @owner = Owner.find_by_id(Restaurant.find_by_id(@reservation.restaurant_id).owner_id)
-    mail( :to => @owner.email,
-    :subject => "You have a new reservation at #{Restaurant.find_by_id(@reservation.restaurant_id).name}" )
+    mail( :to => @owner.email, :subject => "You have a new reservation at #{Restaurant.find_by_id(@reservation.restaurant_id).name}" )
   end
 
   private
