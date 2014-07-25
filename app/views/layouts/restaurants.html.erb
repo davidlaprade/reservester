@@ -51,6 +51,7 @@
           <a class="brand" href="#">Reservester</a>
           <div class="container-fluid nav-collapse">
            <ul class="nav">        
+              <li><%= link_to "Home", restaurants_path  %></li>
               <% if !owner_signed_in? -%>
                 <li><%= link_to "Sign in", new_owner_session_path  %></li>
                 <li><%= link_to "Create Account", new_owner_registration_path  %></li>
