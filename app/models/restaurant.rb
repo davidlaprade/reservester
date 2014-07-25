@@ -11,6 +11,8 @@ class Restaurant < ActiveRecord::Base
 	belongs_to :owner
 	has_many :reservations, dependent: :destroy
 
+	has_and_belongs_to_many :categories
+
 	mount_uploader :image, ImageUploader
 
 end

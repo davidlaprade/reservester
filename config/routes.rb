@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :owners
   resources :owners
+  resources :categories
 
 # adds a dashboard route
 # see http://guides.rubyonrails.org/routing.html section 3.6

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723161032) do
+ActiveRecord::Schema.define(version: 20140725191201) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "owners", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -49,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140723161032) do
     t.string  "image"
     t.string  "created_by"
     t.integer "owner_id"
+    t.integer "category_id"
   end
 
 end
