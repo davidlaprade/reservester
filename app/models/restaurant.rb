@@ -15,4 +15,9 @@ class Restaurant < ActiveRecord::Base
 
 	mount_uploader :image, ImageUploader
 
+	def self.category_names
+		["Mexican", "Bar", "American", "Fine Dining", "Club", 
+			"Fast Food", "Chinese", "Italian", "French", "Bakery"]
+	end
+
 end
