@@ -7,11 +7,12 @@ class Restaurant < ActiveRecord::Base
 					  format: { with: /\d\d\d-\d\d\d-\d\d\d\d/, message: "must be in xxx-xxx-xxxx format"}
 					  #makes sure the phone number is in xxx-xxx-xxxx format
 
-	validates_presence_of :category_id
+
 	belongs_to :owner
 	has_many :reservations, dependent: :destroy
 
-	has_and_belongs_to_many :categories
+	has_many :categories, through: :categorizations
+	has_many :categorizations
 
 	mount_uploader :image, ImageUploader
 

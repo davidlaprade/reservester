@@ -32,11 +32,23 @@
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
       <div class="controls">
-          <% Restaurant.category_names.each do |cn| %>
-              <%= f.radio_button :category_id, Category.find_by_name(cn).id, :class => "required check_radio" %><label><%= cn %></label>
-          <% end %>
+      <% Category.all.each do |category| %>
+        <%= check_box_tag "@restuarant.category_ids[]", category.id %>
+        <%= category.name %>
+      <% end %>
       </div>
     </div>
+
+
+
+
+<!--   </div>
+    <div class="control-group">
+      <%= f.label :category, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.collection_select :category_ids, Category.order(:name), :id, :name, {}, {multiple: true} %>
+      </div>
+    </div> -->
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
