@@ -11,6 +11,8 @@
   <dd></dd>
   <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
   <dd><%= @restaurant.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
+  <dd><%= Category.find_by_id(@restaurant.category_id).name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
   <dd><%= Owner.find_by_id(@restaurant.owner_id).name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>

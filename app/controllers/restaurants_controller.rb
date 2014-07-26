@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
 	def new
 		@restaurant = Restaurant.new
 		@restaurant.created_by = current_owner.name
+		@count = 0
 	end
 
 	def update
@@ -37,8 +38,6 @@ class RestaurantsController < ApplicationController
 
 	def create
 		@restaurant = current_owner.restaurants.create(restaurant_params)
-		# @restaurant = Restaurant.new(restaurant_params)
-		# @restaurant.owner_id = current_owner.id
 
 		if @restaurant.save
 			redirect_to @restaurant
@@ -50,10 +49,6 @@ class RestaurantsController < ApplicationController
 	def show
 		@restaurant = Restaurant.find(params[:id])
 		@reservations = @restaurant.reservations
-		
-		# only want to store reservations which were created at this restaurant to this variable
-		# see "Rails Guides--Active Record Querying" for how this works
-		# @reservations = Reservation.where(restaurant_id: @restaurant)
 
 	end
 
@@ -71,6 +66,6 @@ class RestaurantsController < ApplicationController
 
 	private
 		def restaurant_params
-			params.require(:restaurant).permit(:name, :description, :address, :phone, :image, :created_by, :category_id)
+			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :created_by, :category_id)
 		end
 end
