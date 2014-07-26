@@ -24,7 +24,7 @@ class RestaurantsController < ApplicationController
 	def edit
 		@restaurant = Restaurant.find(params[:id])
 
-		if !(current_owner.name == @restaurant.created_by)
+		if !(current_owner == @restaurant.owner)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else
 			render 'edit'
@@ -37,7 +37,8 @@ class RestaurantsController < ApplicationController
 	end
 
 	def create
-		@restaurant = current_owner.restaurants.create(restaurant_params)
+		@restaurant = current_owner.restaurants.new(restaurant_params)
+		@restaurant.category_ids = params[:restaurant][:category_ids]
 
 		if @restaurant.save
 			redirect_to @restaurant
@@ -66,10 +67,7 @@ class RestaurantsController < ApplicationController
 
 	private
 		def restaurant_params
-			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :created_by, :category_id)
+			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids)
 		end
 
-		def category_ids_params
-			params.permit(:category_ids)
-		end
 end

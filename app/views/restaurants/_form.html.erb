@@ -32,8 +32,9 @@
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
       <div class="controls">
+      <%= hidden_field_tag "restaurant[category_ids][]", nil %>
       <% Category.all.each do |category| %>
-        <%= check_box_tag "@restuarant.category_ids[]", category.id %>
+        <%= check_box_tag "restaurant[category_ids][]", category.id %>
         <%= category.name %>
       <% end %>
       </div>
