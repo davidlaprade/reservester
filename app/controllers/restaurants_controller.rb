@@ -3,8 +3,7 @@ class RestaurantsController < ApplicationController
 
 	def new
 		@restaurant = Restaurant.new
-		@restaurant.created_by = current_owner.name
-		@count = 0
+		@restaurant.owner = current_owner
 	end
 
 	def update

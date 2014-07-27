@@ -32,24 +32,17 @@
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
       <div class="controls">
-      <%= hidden_field_tag "restaurant[category_ids][]", nil %>
-      <% Category.all.each do |category| %>
-        <%= check_box_tag "restaurant[category_ids][]", category.id %>
-        <%= category.name %>
-      <% end %>
-      </div>
-    </div>
-
-
-
-
-<!--   </div>
-    <div class="control-group">
-      <%= f.label :category, :class => 'control-label' %>
-      <div class="controls">
         <%= f.collection_select :category_ids, Category.order(:name), :id, :name, {}, {multiple: true} %>
+        <p>
+        <%= "(Hold CTRL to select multiple)" %>
+        </p>
       </div>
-    </div> -->
+  <div class="control-group">
+    <%= f.label :security_text, :class => 'control-label' %>
+    <div class="controls">
+      <%= recaptcha_tags :display => { :theme => "clean" } %>
+    </div>
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
