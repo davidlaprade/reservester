@@ -37,12 +37,15 @@
         <%= "(Hold CTRL to select multiple)" %>
         </p>
       </div>
-  <div class="control-group">
-    <%= f.label :security_text, :class => 'control-label' %>
-    <div class="controls">
-      <%= recaptcha_tags :display => { :theme => "clean" } %>
+  <% if !(@restaurant.name.present?) %>
+    <div class="control-group">
+      <%= f.label :security_text, :class => 'control-label' %>
+      <div class="controls">
+        <%= recaptcha_tags :display => { :theme => "clean" } %>
+      </div>
     </div>
-  </div>
+  <% end -%>
+  
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
