@@ -7,6 +7,7 @@ gem 'rails', '4.1.2'
 # gem 'sqlite3'
 # Use SCSS for stylesheets
 
+# to use Chosen for drop-down menus
 gem 'chosen-rails'
 
 gem 'sass-rails', '~> 4.0.3'
