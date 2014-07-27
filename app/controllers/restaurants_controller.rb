@@ -9,8 +9,9 @@ class RestaurantsController < ApplicationController
 
 	def update
   		@restaurant = Restaurant.find(params[:id])
+  		@restaurant.category_ids = params[:restaurant][:category_ids]
  
-  		if !(current_owner.name == @restaurant.created_by)
+  		if !(current_owner == @restaurant.owner)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
 			if @restaurant.update(restaurant_params)
@@ -22,7 +23,7 @@ class RestaurantsController < ApplicationController
 	end
 
 	def edit
-		@restaurant = Restaurant.find(params[:id])
+		@restaurant = Restaurant.find_by_id(params[:id])
 
 		if !(current_owner == @restaurant.owner)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'

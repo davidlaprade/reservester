@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726205345) do
+ActiveRecord::Schema.define(version: 20140727121931) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -60,9 +60,7 @@ ActiveRecord::Schema.define(version: 20140726205345) do
     t.string  "address",     limit: 140
     t.string  "phone",       limit: 12
     t.string  "image"
-    t.string  "created_by"
     t.integer "owner_id"
-    t.integer "category_id"
   end
 
 end
