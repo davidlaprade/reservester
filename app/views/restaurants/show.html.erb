@@ -88,11 +88,10 @@
   <% if !(current_owner.present?) || !(current_owner.id == @restaurant.owner_id) -%>
     <%= link_to t('Book Table'),
                 new_restaurant_reservation_path(@restaurant), :class => 'btn btn-primary' %>
-    <%= link_to t('Browse_by_categories'), categories_path, :class => 'btn' %>
   <% end -%>
 
-  <%= link_to t('home'),
-              restaurants_path, :class => 'btn'  %>
+  <%= link_to t("Home"), restaurants_path, :class => 'btn'  %>
+  <%= link_to t("Browse by Categories"), categories_path, :class => 'btn' %>
 
   <% if (current_owner.present?) && (@restaurant.owner_id.present?) && (current_owner.id == @restaurant.owner_id) -%>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),

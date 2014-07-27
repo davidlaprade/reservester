@@ -54,6 +54,9 @@
   <%= link_to t('Create_new_restaurant'),
               new_restaurant_path,
               :class => 'btn btn-primary' %>
+  <%= link_to t('Browse_by_categories'),
+        categories_path,
+        :class => 'btn btn' %>
 <% else -%>
   <%= link_to t('Browse_by_categories'),
             categories_path,

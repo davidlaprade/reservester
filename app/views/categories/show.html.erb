@@ -1,24 +1,39 @@
 <%- model_class = Category -%>
 <div class="page-header">
-  <h1><%= @category.name %></h1>
+  <h1><%= "#{@category.name} Restaurants" %></h1>
 </div>
 
-  <dl class="dl-horizontal">
-  <dd></dd>
-  <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
-  <dd><%= @category.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
-  <dd>
-    <% if @category.restaurants.present? %>
-        <% @category.restaurants.each do |restaurant| %>
-           <%= "#{restaurant.name}" + " " %>
-           <%= link_to "Show", restaurant_path(restaurant)  %></br>
-        <% end -%>
-    <% else %>
-      <%= "There are no restaurants in this category" %></br>
-    <% end -%>
-</dl>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= model_class.human_attribute_name(:phone) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= image_tag restaurant.image_url(:thumb).to_s %></td>
+        <td><%= restaurant.name %></td>
+        <td><%= restaurant.description %></td>
+        <td><%= restaurant.address %></td>
+        <td><%= restaurant.phone %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      restaurant_path(restaurant), :class => 'btn btn-mini' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <%= link_to t("Return to Browse by Categories"),
+  <%= link_to t("Browse by Categories"),
             categories_path,
             :class => 'btn btn-primary' %>
+  <%= link_to t("Browse by Restaurants"),
+            restaurants_path,
+            :class => 'btn btn-danger' %>
