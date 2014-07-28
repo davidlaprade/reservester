@@ -10,12 +10,4 @@ class UsersController < ApplicationController
 		end
 	end
 
-	helper_method :owner?
-	def owner?
-		self.role == "owner"
-	end
-
-	private
-
-
 end

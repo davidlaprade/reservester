@@ -21,4 +21,8 @@ class Restaurant < ActiveRecord::Base
 			"Fast Food", "Chinese", "Italian", "French", "Bakery"]
 	end
 
+	def owner
+		self.user
+	end
+
 end

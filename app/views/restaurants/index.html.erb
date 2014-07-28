@@ -35,7 +35,7 @@
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       restaurant_path(restaurant), :class => 'btn btn-mini' %>
 
-            <% if (current_user.present?) && (restaurant.user_id.present?) && (current_user.id == restaurant.user_id) -%>
+            <% if (current_user.present?) && (current_user.owner?) && (current_user == restaurant.owner) -%>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_restaurant_path(restaurant), :class => 'btn btn-mini' %>
             <%= link_to t('delete'),
