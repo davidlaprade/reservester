@@ -1,16 +1,16 @@
-<%- model_class = Owner -%>
+<%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '@owner.name', :default => model_class.human_attribute_name(@owner.name).titleize %></h1>
+  <h1><%=t '@user.name', :default => model_class.human_attribute_name(@user.name).titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
   <dd></dd>
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @owner.name %></dd>
+  <dd><%= @user.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @owner.email %></dd>
+  <dd><%= @user.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
-	<% @owner.restaurants.each do |restaurant| %>
+	<% @user.restaurants.each do |restaurant| %>
           <tr>
             <dt></dt>
             <dd><%= restaurant.name %></dd>

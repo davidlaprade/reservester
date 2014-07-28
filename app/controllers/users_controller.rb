@@ -2,18 +2,20 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 	
 	def dashboard
-		if owner_signed_in?
-			@owner = current_owner
+		if user_signed_in?
+			@user = current_user
 			render 'dashboard'
 		else
-			redirect_to(new_owner_session_path, notice: "You must sign in first!")
+			redirect_to(new_user_session_path, notice: "You must sign in first!")
 		end
+	end
+
+	helper_method :owner?
+	def owner?
+		self.role == "owner"
 	end
 
 	private
 
-	def owner?
-		@user.role == "owner"
-	end
 
 end

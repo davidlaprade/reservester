@@ -8,13 +8,13 @@ Rails.application.routes.draw do
       resources :reservations
     end
 
-  devise_for :owners
-  resources :owners
+  devise_for :users
+  resources :users
   resources :categories
 
 # adds a dashboard route
 # see http://guides.rubyonrails.org/routing.html section 3.6
-  get 'dashboard5', to: 'owners#dashboard', as: 'dashboard'
+  get 'dashboard5', to: 'users#dashboard', as: 'dashboard'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -8,7 +8,7 @@ class Restaurant < ActiveRecord::Base
 					  #makes sure the phone number is in xxx-xxx-xxxx format
 
 
-	belongs_to :owner
+	belongs_to :user
 	has_many :reservations, dependent: :destroy
 
 	has_many :categories, through: :categorizations

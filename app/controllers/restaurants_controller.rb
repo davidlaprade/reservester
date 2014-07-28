@@ -1,16 +1,16 @@
 class RestaurantsController < ApplicationController
-	before_action :authenticate_owner!, except: [:index, :show]
+	before_action :authenticate_user!, except: [:index, :show]
 
 	def new
 		@restaurant = Restaurant.new
-		@restaurant.owner = current_owner
+		@restaurant.user = current_user
 	end
 
 	def update
   		@restaurant = Restaurant.find(params[:id])
   		@restaurant.category_ids = params[:restaurant][:category_ids]
  
-  		if !(current_owner == @restaurant.owner)
+  		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
 			if @restaurant.update(restaurant_params)
@@ -24,7 +24,7 @@ class RestaurantsController < ApplicationController
 	def edit
 		@restaurant = Restaurant.find_by_id(params[:id])
 
-		if !(current_owner == @restaurant.owner)
+		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else
 			render 'edit'
@@ -32,12 +32,12 @@ class RestaurantsController < ApplicationController
 	end
 
 	def index
-		# raise current_owner.inspect
+		# raise current_user.inspect
 		@restaurants = Restaurant.all
 	end
 
 	def create
-		@restaurant = current_owner.restaurants.new(restaurant_params)
+		@restaurant = current_user.restaurants.new(restaurant_params)
 		@restaurant.category_ids = params[:restaurant][:category_ids]
 
 		if @restaurant.save
@@ -55,7 +55,7 @@ class RestaurantsController < ApplicationController
 	def destroy
 		@restaurant = Restaurant.find(params[:id])
 		
-		if !(current_owner.id == @restaurant.owner_id)
+		if !(current_user.id == @restaurant.user_id)
 			puts 'Not your restaurant!'
 			redirect_to restaurants_path
 		else
@@ -67,6 +67,10 @@ class RestaurantsController < ApplicationController
 	private
 		def restaurant_params
 			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids)
+		end
+
+		def owner
+			self.user
 		end
 
 end
