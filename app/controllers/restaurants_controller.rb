@@ -50,7 +50,6 @@ class RestaurantsController < ApplicationController
 	def show
 		@restaurant = Restaurant.find(params[:id])
 		@reservations = @restaurant.reservations
-
 	end
 
 	def destroy

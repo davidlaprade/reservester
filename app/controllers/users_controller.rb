@@ -1,5 +1,5 @@
-class OwnersController < ApplicationController
-	before_action :authenticate_owner!
+class UsersController < ApplicationController
+	before_action :authenticate_user!
 	
 	def dashboard
 		if owner_signed_in?
@@ -8,6 +8,12 @@ class OwnersController < ApplicationController
 		else
 			redirect_to(new_owner_session_path, notice: "You must sign in first!")
 		end
+	end
+
+	private
+
+	def owner?
+		@user.role == "owner"
 	end
 
 end
