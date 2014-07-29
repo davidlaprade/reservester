@@ -13,6 +13,7 @@ class Restaurant < ActiveRecord::Base
 
 	has_many :categories, through: :categorizations
 	has_many :categorizations
+	has_many :starred_bys, through: :stars
 
 	mount_uploader :image, ImageUploader
 

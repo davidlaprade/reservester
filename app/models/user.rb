@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :restaurants, dependent: :destroy
   has_many :reservations, dependent: :destroy
+  has_many :starred_restaurants, through: :stars
 
 	def owner?
 	  self.role == "owner"

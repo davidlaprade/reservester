@@ -69,8 +69,4 @@ class RestaurantsController < ApplicationController
 			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids)
 		end
 
-		def owner
-			self.user
-		end
-
 end
