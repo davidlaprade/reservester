@@ -2,8 +2,7 @@ class StarsController < ApplicationController
 
 	def new
 		@star = current_user.stars.new
-		@star.restaurant_id = params[:star][:restaurant_id]
-		redirect_to restaurant_stars(@star.restaurant_id)
+		redirect_to restaurant_stars_path(params[:restaurant_id])
 	end
 
 	def create
@@ -17,9 +16,17 @@ class StarsController < ApplicationController
 		end
 	end
 
+	def destroy
+		# raise current_user.inspect
+		@star = Star.find_by_id(params[:id])
+		@restaurant = Restaurant.find_by_id(params[:restaurant_id])
+		@star.destroy
+		redirect_to restaurant_path(@restaurant)
+	end
+
 	private
 	def star_params
-		params.require(:star).permit(:restaurant_id)
+		params.require(:stars).permit(:id, :restaurant_id)
 	end
 
 end

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy
 
   # So users can favorite restaurants
-  has_many :starred_restaurants, through: :stars, source: :restaurant
+  has_many :favorites, through: :stars, source: :restaurant
   has_many :stars
 
 	def owner?

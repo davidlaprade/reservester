@@ -16,7 +16,7 @@ class Restaurant < ActiveRecord::Base
 	has_many :categorizations
 
 	# Allows restaurants to be favorited
-	has_many :starred_by, through: :stars, source: :user
+	has_many :favorited_by, through: :stars, source: :user
 	has_many :stars
 
 	mount_uploader :image, ImageUploader

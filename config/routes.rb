@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :restaurants do
       resources :reservations
       # See http://guides.rubyonrails.org/routing.html section 2.7.2
-      resources :stars, only: [:new, :create]
+      resources :stars, only: [:new, :create, :destroy]
     end
 
   devise_for :users

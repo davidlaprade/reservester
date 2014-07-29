@@ -50,7 +50,7 @@
   </tbody>
 </table>
 
-<% if user_signed_in? -%>
+<% if user_signed_in? && current_user.owner? -%>
   <%= link_to t('Create_new_restaurant'),
               new_restaurant_path,
               :class => 'btn btn-primary' %>

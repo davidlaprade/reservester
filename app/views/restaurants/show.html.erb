@@ -89,7 +89,11 @@
   <% if current_user.present? && current_user.patron? -%>
     <%= link_to t('Book Table'),
                 new_restaurant_reservation_path(@restaurant), :class => 'btn btn-primary' %>
-    <%= link_to t("*"), new_restaurant_star_path(@restaurant.id), :class => 'btn btn-success' %>
+    <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
+      <%= link_to t("Favorite"), new_restaurant_star_path(@restaurant.id), :class => 'btn btn-success' %>
+    <% else %>
+      <%= link_to t("Unfavorite"), restaurant_star_path(@restaurant.id, current_user.stars.find_by_restaurant_id(@restaurant.id)), :method => 'delete', :class => 'btn btn-danger' %>
+    <% end %>
   <% end -%>
 
   <%= link_to t("Home"), restaurants_path, :class => 'btn' %>
@@ -97,12 +101,12 @@
 
 <!-- http://getbootstrap.com/components/#glyphicons-how-to-use -->
 <!-- Want this to link to stars create, at restaurants_stars_path -->
-<a href="">
+<!-- <a href="">
 <span class="glyphicon glyphicon-search"></span>
   <button type="button" class="btn btn-default btn-lg">
   <span class="glyphicon glyphicon-star"></span>
 </button>
-</a>
+</a> -->
 
 
   <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
