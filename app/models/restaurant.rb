@@ -11,9 +11,13 @@ class Restaurant < ActiveRecord::Base
 	belongs_to :user
 	has_many :reservations, dependent: :destroy
 
+	# Restaurant categorization
 	has_many :categories, through: :categorizations
 	has_many :categorizations
-	has_many :starred_bys, through: :stars
+
+	# Allows restaurants to be favorited
+	has_many :starred_by, through: :stars, source: :user
+	has_many :stars
 
 	mount_uploader :image, ImageUploader
 
