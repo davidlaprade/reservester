@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728163503) do
+ActiveRecord::Schema.define(version: 20140730130401) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -37,12 +37,20 @@ ActiveRecord::Schema.define(version: 20140728163503) do
   end
 
   create_table "restaurants", force: true do |t|
-    t.string  "name",        limit: 30
-    t.string  "description", limit: 140
-    t.string  "address",     limit: 140
-    t.string  "phone",       limit: 12
-    t.string  "image"
-    t.integer "user_id"
+    t.string   "name",              limit: 30
+    t.string   "description",       limit: 140
+    t.string   "address",           limit: 140
+    t.string   "phone",             limit: 12
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "weekday_open_at",               default: '2000-01-01 16:00:00'
+    t.datetime "weekday_close_at",              default: '2000-01-01 23:59:59'
+    t.datetime "friday_open_at",                default: '2000-01-01 16:00:00'
+    t.datetime "friday_close_at",               default: '2000-01-01 23:59:59'
+    t.datetime "saturday_open_at",              default: '2000-01-01 16:00:00'
+    t.datetime "saturday_close_at",             default: '2000-01-01 23:59:59'
+    t.datetime "sunday_open_at",                default: '2000-01-01 14:00:00'
+    t.datetime "sunday_close_at",               default: '2000-01-01 20:00:00'
   end
 
   create_table "stars", force: true do |t|
