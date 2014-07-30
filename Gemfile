@@ -43,7 +43,7 @@ gem 'twitter-bootstrap-rails'
 gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'pg'
-gem 'mysql2'
+#gem 'mysql2'
 gem 'better_errors'
 
 gem 'carrierwave'
