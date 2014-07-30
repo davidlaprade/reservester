@@ -31,6 +31,7 @@ gem 'spring',        group: :development
 group :development, :test do
 	gem 'rspec-rails', '~> 3.0.0'
 	gem 'factory_girl_rails', '~> 4.0'
+	gem 'mailcatcher'
 end
 group :test do
 	gem 'faker'
@@ -50,8 +51,6 @@ gem 'carrierwave'
 gem 'rmagick'
 
 gem 'devise'
-
-gem 'mailcatcher'
 
 gem "recaptcha", :require => "recaptcha/rails"
 
