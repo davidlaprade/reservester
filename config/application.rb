@@ -1,13 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'dotenv-rails'
+
 # For Google Static Maps API
 # Kal gave this to me, couldn't migrate to Heroku without it
 # it works but I don't know why
-# if Rails.env.development?
+if Rails.env.development?
+    require 'dotenv'
     Dotenv.load ".env.local", ".env.#{Rails.env}" 
-# end
+end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
