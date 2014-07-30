@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'dotenv'
+require 'dotenv-rails'
 # For Google Static Maps API
 # Kal gave this to me, couldn't migrate to Heroku without it
 # it works but I don't know why
