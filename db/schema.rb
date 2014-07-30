@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730130401) do
+ActiveRecord::Schema.define(version: 20140730214430) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140730130401) do
     t.datetime "saturday_close_at",             default: '2000-01-01 23:59:59'
     t.datetime "sunday_open_at",                default: '2000-01-01 14:00:00'
     t.datetime "sunday_close_at",               default: '2000-01-01 20:00:00'
+    t.integer  "max_reservations"
   end
 
   create_table "stars", force: true do |t|
