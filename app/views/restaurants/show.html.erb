@@ -92,9 +92,9 @@
     <%= link_to t('Book Table'),
                 new_restaurant_reservation_path(@restaurant), :class => 'btn btn-primary' %>
     <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
-      <%= link_to t("Favorite"), new_restaurant_star_path(@restaurant.id), :class => 'btn btn-success' %>
+      <%= link_to t("Favorite"), favorite_restaurant_path(@restaurant.id), :class => 'btn btn-success', :method => 'POST' %>
     <% else %>
-      <%= link_to t("Unfavorite"), restaurant_star_path(@restaurant.id, current_user.stars.find_by_restaurant_id(@restaurant.id)), :method => 'delete', :class => 'btn btn-danger' %>
+      <%= link_to t("Unfavorite"), unfavorite_restaurant_path(@restaurant.id), :method => 'POST', :class => 'btn btn-danger' %>
     <% end %>
   <% end -%>
 

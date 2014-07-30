@@ -3,20 +3,16 @@ Rails.application.routes.draw do
   # Made reservations a sub-resource of restaurants
   # Allows me to access restaurant id from params
     resources :restaurants do
-      resources :reservations
-      # See http://guides.rubyonrails.org/routing.html section 2.7.2
       # adds two new post methods for favoriting and unfavoriting within restaurant route
-      resources :stars do
-         member do
-           post 'favorite'
-           post 'unfavorite'
-         end
+      member do
+         post 'favorite'
+         post 'unfavorite'
       end
+      resources :reservations
     end
 
   devise_for :users
-  resources :users
-  resources :categories
+  resources :users, :categories, :stars
 
 
 # adds custom routes

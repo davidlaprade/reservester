@@ -64,6 +64,19 @@ class RestaurantsController < ApplicationController
 		end
 	end
 
+	def favorite
+		@star = current_user.stars.new
+		@star.restaurant_id = params[:id]
+		@star.save
+		redirect_to restaurant_path(params[:id])
+	end
+
+	def unfavorite
+		@star = current_user.stars.find_by_restaurant_id(params[:id])
+		@star.destroy
+		redirect_to restaurant_path(params[:id])
+	end
+
 	private
 		def restaurant_params
 			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids)
