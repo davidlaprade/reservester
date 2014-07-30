@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20140730214430) do
   end
 
   create_table "reservations", force: true do |t|
-    t.string   "email"
-    t.string   "time_and_date"
-    t.string   "message"
+    t.string   "name"
+    t.string   "at_restaurant"
+    t.string   "time"
+    t.string   "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "restaurant_id"
@@ -37,20 +38,20 @@ ActiveRecord::Schema.define(version: 20140730214430) do
   end
 
   create_table "restaurants", force: true do |t|
-    t.string   "name",              limit: 30
-    t.string   "description",       limit: 140
-    t.string   "address",           limit: 140
-    t.string   "phone",             limit: 12
+    t.string   "name"
+    t.string   "description"
+    t.string   "address"
+    t.string   "phone"
     t.string   "image"
     t.integer  "user_id"
-    t.datetime "weekday_open_at",               default: '2000-01-01 16:00:00'
-    t.datetime "weekday_close_at",              default: '2000-01-01 23:59:59'
-    t.datetime "friday_open_at",                default: '2000-01-01 16:00:00'
-    t.datetime "friday_close_at",               default: '2000-01-01 23:59:59'
-    t.datetime "saturday_open_at",              default: '2000-01-01 16:00:00'
-    t.datetime "saturday_close_at",             default: '2000-01-01 23:59:59'
-    t.datetime "sunday_open_at",                default: '2000-01-01 14:00:00'
-    t.datetime "sunday_close_at",               default: '2000-01-01 20:00:00'
+    t.datetime "weekday_open_at",   default: '2000-01-01 16:00:00'
+    t.datetime "weekday_close_at",  default: '2000-01-01 23:59:59'
+    t.datetime "friday_open_at",    default: '2000-01-01 16:00:00'
+    t.datetime "friday_close_at",   default: '2000-01-01 23:59:59'
+    t.datetime "saturday_open_at",  default: '2000-01-01 16:00:00'
+    t.datetime "saturday_close_at", default: '2000-01-01 23:59:59'
+    t.datetime "sunday_open_at",    default: '2000-01-01 14:00:00'
+    t.datetime "sunday_close_at",   default: '2000-01-01 20:00:00'
     t.integer  "max_reservations"
   end
 
