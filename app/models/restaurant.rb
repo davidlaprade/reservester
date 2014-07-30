@@ -7,7 +7,6 @@ class Restaurant < ActiveRecord::Base
 					  format: { with: /\d\d\d-\d\d\d-\d\d\d\d/, message: "must be in xxx-xxx-xxxx format"}
 					  #makes sure the phone number is in xxx-xxx-xxxx format
 
-
 	belongs_to :user
 	has_many :reservations, dependent: :destroy
 

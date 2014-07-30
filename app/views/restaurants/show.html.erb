@@ -22,7 +22,7 @@
       <% end -%>
     <% end -%>
   </dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_name) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
   <dd><%= User.find_by_id(@restaurant.user_id).name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @restaurant.description %></dd>
@@ -30,6 +30,8 @@
   <dd><%= @restaurant.address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
   <dd><%= @restaurant.phone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:favorited_by) %>:</strong></dt>
+  <dd><%= @restaurant.favorited_by.count %></dd>
 </dl>
 
 <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>

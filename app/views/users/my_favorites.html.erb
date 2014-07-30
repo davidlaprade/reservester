@@ -1,0 +1,29 @@
+<% if !(current_user.present?) %>
+  <% redirect_to(new_user_session_path, notice: "You must sign in first!") %>
+<% end %> 
+
+
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%= "#{@user.name}" + "'s Favorites" %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dd></dd>
+  <% if current_user.favorites.present? %>
+    <dt><strong><%= model_class.human_attribute_name(:favorites) %>:</strong></dt>
+  	<% current_user.favorites.each do |favorite| %>
+            <tr>
+              <dt></dt>
+              <dd><%= favorite.name %></dd>
+            </tr>
+      <% end %>
+  <% else %>
+    <dt> You have no favorites! </dt>
+  <% end %>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('home'),
+              restaurants_path, :class => 'btn'  %>
+</div>

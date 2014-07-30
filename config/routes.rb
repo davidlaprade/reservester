@@ -1,25 +1,30 @@
 Rails.application.routes.draw do
 
-  resources :stars
-
   # Made reservations a sub-resource of restaurants
-  # I will only ever go to a reservation when there is a restaurant it is for
-  # Allows me to access restaurant class variables from reservation views
-  # This will change the routes accordingly
+  # Allows me to access restaurant id from params
     resources :restaurants do
       resources :reservations
       # See http://guides.rubyonrails.org/routing.html section 2.7.2
-      resources :stars, only: [:new, :create, :destroy]
+      # adds two new post methods for favoriting and unfavoriting within restaurant route
+      resources :stars do
+         member do
+           post 'favorite'
+           post 'unfavorite'
+         end
+      end
     end
 
   devise_for :users
   resources :users
   resources :categories
-  resources :stars
 
-# adds a dashboard route
+
+# adds custom routes
 # see http://guides.rubyonrails.org/routing.html section 3.6
+# the as: option generates the rails helper path
   get 'dashboard5', to: 'users#dashboard', as: 'dashboard'
+  get 'my-favorites', to: 'users#my_favorites', as: 'my_favorites'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -2,7 +2,10 @@ class StarsController < ApplicationController
 
 	def new
 		@star = current_user.stars.new
-		redirect_to restaurant_stars_path(params[:restaurant_id])
+		# redirect_to restaurant_stars_path(params[:restaurant_id])
+		# See http://guides.rubyonrails.org/layouts_and_rendering.html
+		# redirect_to action: :create
+		redirect_to restaurant_path(params[:restaurant_id])
 	end
 
 	def create
