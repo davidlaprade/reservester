@@ -59,7 +59,7 @@
               <% if user_signed_in? -%>
                 <li><%= link_to "Dashboard", dashboard_path  %></li>
                 <li><%= link_to "Favorites", my_favorites_path  %></li>
-                <li><%= link_to "Not #{current_user.name}? Log out", destroy_user_session_path, :method => :delete,
+                <li><%= link_to "Log out?", destroy_user_session_path, :method => :delete,
                               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }%></li>
               <% end -%>
             </ul>

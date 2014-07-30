@@ -9,6 +9,8 @@
   <dd><%= @user.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
   <dd><%= @user.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
+  <dd><%= @user.role %></dd>
   <% if current_user.present? && current_user.owner? %>
     <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
   	<% @user.restaurants.each do |restaurant| %>
