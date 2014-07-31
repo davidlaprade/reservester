@@ -13,14 +13,19 @@
   <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
   <dd><%= @restaurant.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:categories) %>:</strong></dt>
-  <dd>
-    <% @restaurant.categories.each do |category| %>
-      <% if category == @restaurant.categories.last %>
-       <%= category.name %>
-      <% else %>
-       <%= category.name + ", " %>
+    <% if !(@restaurant.categories.present?) %>
+      <dd>Presently Uncategorized</dd>
+    <% else %>
+      <dd>
+      <% @restaurant.categories.each do |category| %>
+        <% if category == @restaurant.categories.last %>
+         <%= category.name %>
+        <% else %>
+         <%= category.name + ", " %>
+        <% end -%>
       <% end -%>
-    <% end -%>
+      </dd>
+    <% end %>
   </dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
   <dd><%= User.find_by_id(@restaurant.user_id).name %></dd>

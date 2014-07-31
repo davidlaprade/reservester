@@ -13,13 +13,16 @@
   <dd><%= @user.role %></dd>
   <% if current_user.present? && current_user.owner? %>
     <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
-  	<% @user.restaurants.each do |restaurant| %>
-            <tr>
-              <dt></dt>
-              <dd><%= restaurant.name %></dd>
-            </tr>
+    <% if current_user.restaurants.present? %>
+    	<% @user.restaurants.each do |restaurant| %>
+        <tr>
+          <dd><%= restaurant.name %></dd>
+        </tr>
       <% end %>
+    <% else %>
+      <dd><%= "You have no restaurants!" %></dd>
     <% end %>
+  <% end %>  
 </dl>
 
 <div class="form-actions">

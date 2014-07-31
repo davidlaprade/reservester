@@ -1,5 +1,6 @@
 class Restaurant < ActiveRecord::Base
 	validates :name, presence: true
+	validates_uniqueness_of :name
 	validates :description, presence:true,
 							length: {minimum: 5}
 	validates :address, presence:true

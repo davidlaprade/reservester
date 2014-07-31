@@ -23,11 +23,49 @@
       <%= f.text_field :phone, :class => 'text_field' %>
     </div>
   </div>
+    <div class="control-group">
+    <%= f.label :weekdays, :class => 'control-label' %>
+    <div class="controls">
+      <%= "Open:" %>
+      <%= f.text_field :weekday_open_at, :class => 'text_field' %>
+      <%= "Close:" %>
+      <%= f.text_field :weekday_close_at, :class => 'text_field' %>
+      <p></p>
+    </div>
+  <div class="control-group">
+    <%= f.label :fridays, :class => 'control-label' %>
+    <div class="controls">
+      <%= "Open:" %>
+      <%= f.text_field :friday_open_at, :class => 'text_field' %>
+      <%= "Close:" %>
+      <%= f.text_field :friday_close_at, :class => 'text_field' %>
+      <p></p>
+    </div> 
+  <div class="control-group">
+    <%= f.label :saturdays, :class => 'control-label' %>
+    <div class="controls">
+      <%= "Open:" %>
+      <%= f.text_field :saturday_open_at, :class => 'text_field' %>
+      <%= "Close:" %>
+      <%= f.text_field :saturday_close_at, :class => 'text_field' %>
+      <p></p>
+    </div>
+  <div class="control-group">
+    <%= f.label :sundays, :class => 'control-label' %>
+    <div class="controls">
+      <%= "Open:" %>
+      <%= f.text_field :sunday_open_at, :class => 'text_field' %>
+      <%= "Close:" %>
+      <%= f.text_field :sunday_close_at, :class => 'text_field' %>
+      <p></p>
+    </div>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">
       <%= f.file_field :image, :class => 'file_field' %>
     </div>
+
+
   </div>
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
@@ -36,7 +74,10 @@
         <p>
         <%= "(Hold CTRL to select multiple)" %>
         </p>
-      </div>
+
+        </div>
+
+      
   <% if !(@restaurant.name.present?) %>
     <div class="control-group">
       <%= f.label :security_text, :class => 'control-label' %>

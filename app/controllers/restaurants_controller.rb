@@ -23,6 +23,9 @@ class RestaurantsController < ApplicationController
 
 	def edit
 		@restaurant = Restaurant.find_by_id(params[:id])
+		# Translate default times into 12-hour format
+		@restaurant.weekday_open_at = @restaurant.weekday_open_at.strftime("%I:%M %p")
+		@restaurant.weekday_close_at = @restaurant.weekday_open_at.strftime("%I:%M %p")
 
 		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'

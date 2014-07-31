@@ -12,7 +12,7 @@
   <dd></dd>
   <% if current_user.favorites.present? %>
     <dt><strong><%= model_class.human_attribute_name(:favorites) %>:</strong></dt>
-  	<% current_user.favorites.each do |favorite| %>
+  	<% current_user.favorites.order(:name).each do |favorite| %>
             <tr>
               <dt></dt>
               <dd><%= favorite.name %></dd>
