@@ -22,6 +22,8 @@
     <div class="controls">
       <%= f.text_field :phone, :class => 'text_field' %>
     </div>
+
+
   </div>
     <div class="control-group">
     <%= f.label :weekdays, :class => 'control-label' %>
@@ -30,6 +32,9 @@
       <%= f.text_field :weekday_open_at, :class => 'text_field' %>
       <%= "Close:" %>
       <%= f.text_field :weekday_close_at, :class => 'text_field' %>
+      <%= "Closed:" %>
+      <%= hidden_field_tag "restaurant[weekday_close_at]", nil %>
+      <%= check_box_tag "restaurant[weekday_open_at]", nil %>
       <p></p>
     </div>
   <div class="control-group">
@@ -39,6 +44,9 @@
       <%= f.text_field :friday_open_at, :class => 'text_field' %>
       <%= "Close:" %>
       <%= f.text_field :friday_close_at, :class => 'text_field' %>
+      <%= "Closed:" %>
+      <%= hidden_field_tag "restaurant[friday_close_at]", nil %>
+      <%= check_box_tag "restaurant[friday_open_at]", nil %>
       <p></p>
     </div> 
   <div class="control-group">
@@ -48,6 +56,9 @@
       <%= f.text_field :saturday_open_at, :class => 'text_field' %>
       <%= "Close:" %>
       <%= f.text_field :saturday_close_at, :class => 'text_field' %>
+      <%= "Closed:" %>
+      <%= hidden_field_tag "restaurant[saturday_close_at]", nil %>
+      <%= check_box_tag "restaurant[saturday_open_at]", nil %>
       <p></p>
     </div>
   <div class="control-group">
@@ -57,6 +68,9 @@
       <%= f.text_field :sunday_open_at, :class => 'text_field' %>
       <%= "Close:" %>
       <%= f.text_field :sunday_close_at, :class => 'text_field' %>
+      <%= "Closed:" %>
+      <%= hidden_field_tag "restaurant[sunday_close_at]", nil %>
+      <%= check_box_tag "restaurant[sunday_open_at]", nil %>
       <p></p>
     </div>
   <div class="control-group">
