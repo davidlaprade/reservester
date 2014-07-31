@@ -24,8 +24,7 @@ class RestaurantsController < ApplicationController
 	def edit
 		@restaurant = Restaurant.find_by_id(params[:id])
 		# Translate default times into 12-hour format
-		@restaurant.weekday_open_at = @restaurant.weekday_open_at.strftime("%I:%M %p")
-		@restaurant.weekday_close_at = @restaurant.weekday_open_at.strftime("%I:%M %p")
+		@restaurant.fix_times
 
 		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
@@ -52,6 +51,7 @@ class RestaurantsController < ApplicationController
 
 	def show
 		@restaurant = Restaurant.find(params[:id])
+		@restaurant.fix_times
 		@reservations = @restaurant.reservations
 	end
 
@@ -82,7 +82,21 @@ class RestaurantsController < ApplicationController
 
 	private
 		def restaurant_params
-			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids)
+			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids,
+				:weekday_open_at, :weekday_close_at, :friday_close_at, :friday_open_at, :saturday_close_at, :saturday_open_at,
+				:sunday_close_at, :sunday_open_at)
 		end
 
+		# Translate default times into 12-hour format
+		def fix_times
+			self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p")
+			self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p")
+			self.friday_open_at = self.friday_open_at.strftime("%I:%M %p")
+			self.friday_close_at = self.friday_close_at.strftime("%I:%M %p")
+			self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p")
+			self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p")
+			self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p")
+			self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p")
+			self.save
+		end
 end

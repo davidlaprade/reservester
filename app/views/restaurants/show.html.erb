@@ -35,6 +35,15 @@
   <dd><%= @restaurant.address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
   <dd><%= @restaurant.phone %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:hours) %>:</strong></dt>
+  <dd><%= "Weekdays - #{@restaurant.weekday_open_at.strftime("%I:%M %p")} to 
+          #{@restaurant.weekday_close_at.strftime("%I:%M %p")}" %></dd>
+  <dd><%= "Fridays - #{@restaurant.friday_open_at.strftime("%I:%M %p")} to 
+          #{@restaurant.friday_close_at.strftime("%I:%M %p")}" %></dd>
+  <dd><%= "Saturdays - #{@restaurant.saturday_open_at.strftime("%I:%M %p")} to 
+          #{@restaurant.saturday_close_at.strftime("%I:%M %p")}" %></dd>
+  <dd><%= "Sundays - #{@restaurant.sunday_open_at.strftime("%I:%M %p")} to 
+          #{@restaurant.sunday_close_at.strftime("%I:%M %p")}" %></dd>          
   <dt><strong><%= model_class.human_attribute_name(:favorited_by) %>:</strong></dt>
   <dd><%= @restaurant.favorited_by.count %></dd>
 </dl>

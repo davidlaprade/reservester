@@ -26,8 +26,22 @@ class Restaurant < ActiveRecord::Base
 			"Fast Food", "Chinese", "Italian", "French", "Bakery"]
 	end
 
+	# Want an owner attribute without adding a redundant table
 	def owner
 		self.user
+	end
+
+	# Translate default times into 12-hour format
+	def fix_times
+		self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p")
+		self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p")
+		self.friday_open_at = self.friday_open_at.strftime("%I:%M %p")
+		self.friday_close_at = self.friday_close_at.strftime("%I:%M %p")
+		self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p")
+		self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p")
+		self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p")
+		self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p")
+		self.save
 	end
 
 end
