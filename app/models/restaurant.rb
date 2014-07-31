@@ -33,15 +33,20 @@ class Restaurant < ActiveRecord::Base
 
 	# Translate default times into 12-hour format
 	def fix_times
-		self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p")
-		self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p")
-		self.friday_open_at = self.friday_open_at.strftime("%I:%M %p")
-		self.friday_close_at = self.friday_close_at.strftime("%I:%M %p")
-		self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p")
-		self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p")
-		self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p")
-		self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p")
+		if !(self.weekday_open_at == nil); self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.friday_open_at = self.friday_open_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.friday_close_at = self.friday_close_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p"); end
+		if !(self.weekday_open_at == nil); self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p"); end
 		self.save
 	end
+
+	# def format_time
+	# 	self.strftime("%I:%M %p")
+	# end
 
 end
