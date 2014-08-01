@@ -7,11 +7,14 @@ before_filter :assign_restaurant
 	def new
 		@reservation = Reservation.new
 
+		# Get the list of available time slots from the model
+
 	end
 
 	def create
 		@reservation = Reservation.new(reservation_params)
 		@reservation.restaurant_id = @restaurant.id
+		@reservation.user_id = current_user.id
 		
 	#add the following to verify captcha input
 		# captcha_message = 'That is not what the picture contains!'
