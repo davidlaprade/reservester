@@ -36,7 +36,7 @@ class Restaurant < ActiveRecord::Base
 	def fix_times
 		if !(self.weekday_open_at == nil); self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p");
 			else self.weekday_close_at = self.weekday_open_at; end
-		if !(self.weekday_close_at == nil); self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p"); 
+		if !(self.weekday_close_at == nil); self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p"); 
 			else self.weekday_open_at = self.weekday_close_at; end
 		if !(self.friday_open_at == nil); self.friday_open_at = self.friday_open_at.strftime("%I:%M %p");
 			else self.friday_close_at = self.friday_open_at; end

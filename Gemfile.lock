@@ -290,6 +290,7 @@ DEPENDENCIES
   mailcatcher
   mysql2
   pg
+  pry
   rails (= 4.1.2)
   recaptcha
   rmagick

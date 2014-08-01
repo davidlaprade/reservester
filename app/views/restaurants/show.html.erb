@@ -39,8 +39,8 @@
   <% if @restaurant.weekday_open_at == nil %>
     <dd><%= "Weekdays - Closed" %></dd>
   <% else %>
-    <dd><%= "Weekdays - #{@restaurant.weekday_open_at} to 
-          #{@restaurant.weekday_close_at}" %></dd>
+    <dd><%= "Weekdays - #{@restaurant.weekday_open_at.strftime("%I:%M %p")} to 
+          #{@restaurant.weekday_close_at.strftime("%I:%M %p")}" %></dd>
   <% end %>
   <% if @restaurant.friday_open_at == nil %>
     <dd><%= "Fridays - Closed" %></dd>
