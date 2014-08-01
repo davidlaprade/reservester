@@ -18,6 +18,7 @@ belongs_to :user
 			copy.weekday_open_at = copy.weekday_open_at + (60*30)
 		end
 		# ....
+		#  . . .
 
 	end
 
