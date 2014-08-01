@@ -10,6 +10,9 @@ class RestaurantsController < ApplicationController
   		@restaurant = Restaurant.find(params[:id])
   		@restaurant.category_ids = params[:restaurant][:category_ids]
  
+		# raise current_user.inspect
+
+
   		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
