@@ -19,13 +19,12 @@ class RestaurantsController < ApplicationController
   		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
-			if @restaurant.update(restaurant_params)
+			if @restaurant.save
     		redirect_to @restaurant
  	 		else
     		render 'edit'
     		end
   		end
-  		redirect_to @restaurant
 	end
 
 	def edit
