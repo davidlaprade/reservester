@@ -9,17 +9,14 @@ class RestaurantsController < ApplicationController
 	def update
   		@restaurant = Restaurant.find(params[:id])
   		@restaurant.category_ids = params[:restaurant][:category_ids]
- 
-		if checkbox_params[:weekday_closed_checkbox] == "checked"
-			@restaurant.weekday_open_at = nil
-			@restaurant.weekday_close_at = nil
-		end
+
  
 		# raise current_user.inspect
   		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
-			if @restaurant.save
+			if @restaurant.update(restaurant_params)
+			@restaurant.fix_times
     		redirect_to @restaurant
  	 		else
     		render 'edit'
