@@ -9,7 +9,7 @@ belongs_to :restaurant
 belongs_to :user
 
 def self.days
-	[Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+	["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 end
 
 	private
