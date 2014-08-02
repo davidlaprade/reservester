@@ -32,26 +32,38 @@ class Restaurant < ActiveRecord::Base
 		self.user
 	end
 
+	before_save :update_closed_fields
+
+	def update_closed_fields
+		if self.sunday_close_at == nil || self.sunday_open_at == nil
+			self.sunday_close_at = nil
+			self.sunday_open_at = nil
+		end
+		if self.weekday_close_at == nil || self.weekday_open_at == nil
+			self.weekday_close_at = nil
+			self.weekday_open_at = nil
+		end
+		if self.friday_close_at == nil || self.friday_open_at == nil
+			self.friday_close_at = nil
+			self.friday_open_at = nil
+		end
+		if self.saturday_close_at == nil || self.saturday_open_at == nil
+			self.saturday_close_at = nil
+			self.saturday_open_at = nil
+		end
+	end
+
 	# Translate default times into 12-hour format
 	# If one value is nil, the restaurant is closed, so the other should be nil as well
 	def fix_times
-		if !(self.weekday_open_at == nil); self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p");
-			else self.weekday_close_at = self.weekday_open_at; end
-		if !(self.weekday_close_at == nil); self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p"); 
-			else self.weekday_open_at = self.weekday_close_at; end
-		if !(self.friday_open_at == nil); self.friday_open_at = self.friday_open_at.strftime("%I:%M %p");
-			else self.friday_close_at = self.friday_open_at; end
-		if !(self.friday_close_at == nil); self.friday_close_at = self.friday_close_at.strftime("%I:%M %p");
-			else self.friday_open_at = self.friday_close_at; end
-		if !(self.saturday_open_at == nil); self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p");
-			else self.saturday_close_at = self.saturday_open_at; end
-		if !(self.saturday_close_at == nil); self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p");
-			else self.saturday_open_at = self.saturday_close_at; end
-		if !(self.sunday_open_at == nil); self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p");
-			else self.sunday_close_at = self.sunday_open_at; end
-		if !(self.sunday_close_at == nil); self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p");
-			else self.sunday_open_at = self.friday_close_at; end
-		self.save
+		if self.weekday_open_at.present?; self.weekday_open_at = self.weekday_open_at.strftime("%I:%M %p"); end
+		if self.weekday_close_at.present?; self.weekday_close_at = self.weekday_close_at.strftime("%I:%M %p"); end 
+		if self.friday_open_at.present?; self.friday_open_at = self.friday_open_at.strftime("%I:%M %p"); end
+		if self.friday_close_at.present?; self.friday_close_at = self.friday_close_at.strftime("%I:%M %p"); end
+		if self.saturday_open_at.present?; self.saturday_open_at = self.saturday_open_at.strftime("%I:%M %p"); end
+		if self.saturday_close_at.present?; self.saturday_close_at = self.saturday_close_at.strftime("%I:%M %p"); end
+		if self.sunday_open_at.present?; self.sunday_open_at = self.sunday_open_at.strftime("%I:%M %p"); end
+		if self.sunday_close_at.present?; self.sunday_close_at = self.sunday_close_at.strftime("%I:%M %p"); end
 	end
 
 	# def format_time

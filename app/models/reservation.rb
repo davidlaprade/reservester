@@ -8,6 +8,10 @@ validates_associated :user, :restaurant
 belongs_to :restaurant
 belongs_to :user
 
+def self.days
+	[Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+end
+
 	private
 	# generates list of available timeslots
 	# call it on a reservation object

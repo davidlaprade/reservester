@@ -45,7 +45,7 @@ before_filter :assign_restaurant
 
 	private
 		def reservation_params
-			params.require(:reservation).permit(:time_and_date, :message, :restaurant_id)
+			params.require(:reservation).permit(:time_and_date, :message, :restaurant_id, :day)
 		end
 
 		def assign_restaurant
