@@ -2,6 +2,7 @@ class Reservation < ActiveRecord::Base
 
 validates :email, presence: true
 validates :time_and_date, presence: true
+validates_uniqueness_of :restaurant_id, scope: :user_id, message: "can't be booked twice!"
 
 belongs_to :restaurant
 belongs_to :user

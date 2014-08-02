@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :restaurants, dependent: :destroy
   has_many :reservations, dependent: :destroy
+  has_many :reservations_at, through: :reservations, source: :restaurant
 
   # So users can favorite restaurants
   has_many :favorites, through: :stars, source: :restaurant

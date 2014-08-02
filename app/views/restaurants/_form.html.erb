@@ -68,6 +68,12 @@
       <%= check_box_tag "restaurant[sunday_open_at]", nil %>
       <p></p>
     </div>
+    <div class="control-group">
+    <%= f.label :max_reservations, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.file_field :max_reservations, :class => 'file_field' %>
+    </div>
+    </div>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">

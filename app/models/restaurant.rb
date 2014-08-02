@@ -10,6 +10,7 @@ class Restaurant < ActiveRecord::Base
 
 	belongs_to :user
 	has_many :reservations, dependent: :destroy
+	has_many :reserved_by, through: :reservations, source: :user 
 
 	# Restaurant categorization
 	has_many :categories, through: :categorizations
@@ -20,6 +21,8 @@ class Restaurant < ActiveRecord::Base
 	has_many :stars
 
 	mount_uploader :image, ImageUploader
+
+	attr_accessor :weekday_closed_checkbox
 
 	# before_save :update_fields
 
