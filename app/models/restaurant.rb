@@ -21,6 +21,15 @@ class Restaurant < ActiveRecord::Base
 
 	mount_uploader :image, ImageUploader
 
+	# before_save :update_fields
+
+	# def update_fields
+	# 	if params[:weekday_closed_checkbox] == "checked"
+	# 		@restaurant.weekday_open_at = nil
+	# 		@restaurant.weekday_close_at = nil
+	# 	end
+	# end
+
 	def self.category_names
 		["Mexican", "Bar", "American", "Fine Dining", "Club", 
 			"Fast Food", "Chinese", "Italian", "French", "Bakery"]

@@ -31,7 +31,8 @@
       <%= "Close:" %>
       <%= f.text_field :weekday_close_at, :class => 'text_field' %>
       <%= "Closed:" %>
-      <%= check_box_tag "restaurant[weekday_closed_checkbox]", "closed" %>
+      <%= hidden_field_tag "restaurant[weekday_closed_checkbox]", nil %>
+      <%= check_box_tag "restaurant[weekday_closed_checkbox]", "checked" %>
       <p></p>
     </div>
   <div class="control-group">
@@ -72,8 +73,6 @@
     <div class="controls">
       <%= f.file_field :image, :class => 'file_field' %>
     </div>
-
-
   </div>
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
@@ -103,3 +102,5 @@
                 restaurants_path, :class => 'btn' %>
   </div>
 <% end %>
+
+  

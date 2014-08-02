@@ -10,9 +10,12 @@ class RestaurantsController < ApplicationController
   		@restaurant = Restaurant.find(params[:id])
   		@restaurant.category_ids = params[:restaurant][:category_ids]
  
+		# if params[:weekday_closed_checkbox] == "checked"
+		# 	@restaurant.weekday_open_at = nil
+		# 	@restaurant.weekday_close_at = nil
+		# end
+ 
 		# raise current_user.inspect
-
-
   		if !(current_user == @restaurant.user)
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
@@ -87,7 +90,11 @@ class RestaurantsController < ApplicationController
 		def restaurant_params
 			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids,
 				:weekday_open_at, :weekday_close_at, :friday_close_at, :friday_open_at, :saturday_close_at, :saturday_open_at,
-				:sunday_close_at, :sunday_open_at, :weekday_closed_checkbox)
+				:sunday_close_at, :sunday_open_at)
+		end
+
+		def checkbox_params
+			params.require(:restaurant).permit(:weekday_closed_checkbox)
 		end
 
 end
