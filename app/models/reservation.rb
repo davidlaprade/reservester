@@ -8,24 +8,20 @@ validates_associated :user, :restaurant
 belongs_to :restaurant
 belongs_to :user
 
-def self.days
-	["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-end
 
-	private
 	# generates list of available timeslots
 	# call it on a reservation object
 	# saves available timeslots to temporary variables stored as arrays
-	def time_slots
+	def self.time_slots
 		a = Array.new
-		copy = self.restaurant
-		while copy.weekday_open_at < (a.weekday_close_at - 30*60)
-			a << copy.weekday_open_at.strftime("%I:%M %p")
-			copy.weekday_open_at = copy.weekday_open_at + (60*30)
-		end
-		# ....
-		#  . . .
+		start_time = Time.new(2000, 1, 1, 12)
+		close_time = Time.new(2000, 1, 1, 23, 59, 59)
 
+		while start_time < (close_time)
+			a << [start_time.strftime("%I:%M %p"), start_time.strftime("%I:%M %p")]
+			start_time = start_time + (60*30)
+		end
+		return a
 	end
 
 end
