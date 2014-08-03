@@ -9,6 +9,13 @@ validates :email, presence: true
 validates :time_and_date, presence: true
 validates_uniqueness_of :restaurant_id, scope: [:user_id, :day], message: "can't be booked twice the same day!"
 
+# See Active Model Validations at http://api.rubyonrails.org/
+# See also http://guides.rubyonrails.org/active_record_validations.html
+# validates :first_name, :last_name do |record, attr, value|
+#     record.errors.add attr, 'starts with z.' if value.to_s[0] == ?z
+# end
+
+
 validates_associated :user, :restaurant
 
 belongs_to :restaurant
