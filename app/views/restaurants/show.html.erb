@@ -82,6 +82,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:email) %></th>
           <th><%= model_class.human_attribute_name(:time_and_date) %></th>
           <th><%= model_class.human_attribute_name(:message) %></th>
@@ -91,6 +92,7 @@
       <tbody>
         <% @reservations.each do |reservation| %>
           <tr>
+            <td><%= reservation.reserved_by.name %></td>
             <td><%= reservation.email %></td>
             <td><%= reservation.time_and_date %></td>
             <td><%= reservation.message %></td>

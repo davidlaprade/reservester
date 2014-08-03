@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140802185723) do
+ActiveRecord::Schema.define(version: 20140803000532) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140802185723) do
     t.datetime "time_and_date"
     t.string   "message"
     t.string   "day"
+    t.string   "status",        default: "pending"
   end
 
   create_table "restaurants", force: true do |t|

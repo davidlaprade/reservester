@@ -16,7 +16,6 @@ class RestaurantsController < ApplicationController
 			redirect_to restaurants_path, notice: 'Not your restaurant!'
 		else 
 			if @restaurant.update(restaurant_params)
-			@restaurant.fix_times
     		redirect_to @restaurant
  	 		else
     		render 'edit'
