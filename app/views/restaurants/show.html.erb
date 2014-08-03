@@ -86,6 +86,7 @@
           <th><%= model_class.human_attribute_name(:email) %></th>
           <th><%= model_class.human_attribute_name(:time_and_date) %></th>
           <th><%= model_class.human_attribute_name(:message) %></th>
+          <th><%= model_class.human_attribute_name(:status) %></th>
           <th><%=t '.actions', :default => t("helpers.actions") %></th>
         </tr>
       </thead>
@@ -96,8 +97,12 @@
             <td><%= reservation.email %></td>
             <td><%= reservation.time_and_date %></td>
             <td><%= reservation.message %></td>
+            <td><%= reservation.status %></td>
             <td>
-              <%= link_to t('Confirm reservation'),
+              <%= link_to t('Approve'), approve_restaurant_reservation_path(@restaurant.id, reservation.id),
+              :method => :post,
+              :class => 'btn btn-mini btn-success' %>
+              <%= link_to t('Reject'),
               restaurant_reservation_path(@restaurant.id, reservation),
               :method => :delete,
               :class => 'btn btn-mini btn-danger' %>

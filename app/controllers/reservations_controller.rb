@@ -7,9 +7,16 @@ before_filter :assign_restaurant
 	def new
 		@reservation = Reservation.new
 		@reservation.email = current_user.email
+	end
 
-		# Get the list of available time slots from the model
-
+	def approve
+		@reservation = Reservation.find(params[:id])
+		@restaurant = @reservation.restaurant
+		@reservation.status = "approved"
+		if current_user == @restaurant.owner
+			@reservation.save
+		end
+		redirect_to @restaurant
 	end
 
 	def create
@@ -45,7 +52,7 @@ before_filter :assign_restaurant
 
 	private
 		def reservation_params
-			params.require(:reservation).permit(:time_and_date, :message, :restaurant_id, :day)
+			params.require(:reservation).permit(:time_and_date, :message, :restaurant_id, :day, :status)
 		end
 
 		def assign_restaurant

@@ -8,7 +8,12 @@ Rails.application.routes.draw do
          post 'favorite'
          post 'unfavorite'
       end
-      resources :reservations
+      # adds route for new "approve" action in the reservations controller
+      resources :reservations do
+        member do
+          post 'approve'
+        end
+      end
     end
 
   devise_for :users
