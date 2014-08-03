@@ -18,12 +18,43 @@
         <tr>
           <dd><%= restaurant.name %></dd>
         </tr>
-      <% end %>
+      <% end -%>
     <% else %>
       <dd><%= "You have no restaurants!" %></dd>
     <% end %>
   <% end %>  
 </dl>
+
+<% current_user.restaurants.order(:name).each do |restaurant| %>
+  <% if (restaurant.reservations.present?) -%>
+    <h4><%= "Approved Reservations at #{restaurant.name}" %></h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:name) %></th>
+            <th><%= model_class.human_attribute_name(:restaurant) %></th>          
+            <th><%= model_class.human_attribute_name(:email) %></th>
+            <th><%= model_class.human_attribute_name(:time_and_date) %></th>
+            <th><%= model_class.human_attribute_name(:message) %></th>
+            <th><%= model_class.human_attribute_name(:status) %></th>
+          </tr>
+        </thead>
+        <tbody>
+            <% restaurant.reservations.where(status: 'approved').each do |reservation| %>
+              <tr>
+                <td><%= reservation.reserved_by.name %></td>
+                <td><%= reservation.restaurant.name %></td>             
+                <td><%= reservation.email %></td>
+                <td><%= reservation.time_and_date %></td>
+                <td><%= reservation.message %></td>
+                <td><%= reservation.status %></td>
+              </tr>
+            <% end %>
+        </tbody>
+      </table>
+      </tr>
+  <% end %>
+<% end %>
 
 <div class="form-actions">
   <%= link_to t('home'),

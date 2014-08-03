@@ -66,25 +66,25 @@
 
 <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
   <h3> Pending Reservations </h3>
-  <% if !(@reservations.present?) -%>
+  <% if !(@reservations.where(status: 'pending').present?) -%>
     <table class="table table-striped">
       <thead>
         <tr></tr>
       </thead>
       <tbody>
         <tr>
-          <td>You have no reservations<td>
+          <td>You have no pendingreservations<td>
         </tr>
       </tbody>
     </table>
-  <% end -%>
-  <% if (@reservations.present?) -%>
+  <% else -%>
     <table class="table table-striped">
       <thead>
         <tr>
           <th><%= model_class.human_attribute_name(:name) %></th>
           <th><%= model_class.human_attribute_name(:email) %></th>
-          <th><%= model_class.human_attribute_name(:time_and_date) %></th>
+          <th><%= model_class.human_attribute_name(:day) %></th>
+          <th><%= model_class.human_attribute_name(:time) %></th>
           <th><%= model_class.human_attribute_name(:message) %></th>
           <th><%= model_class.human_attribute_name(:status) %></th>
           <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -95,7 +95,8 @@
           <tr>
             <td><%= reservation.reserved_by.name %></td>
             <td><%= reservation.email %></td>
-            <td><%= reservation.time_and_date %></td>
+            <td><%= reservation.day %></td>
+            <td><%= reservation.time_and_date.strftime("%I:%M %p") %></td>
             <td><%= reservation.message %></td>
             <td><%= reservation.status %></td>
             <td>
@@ -110,7 +111,7 @@
         <% end %>
       </tbody>
     </table>
-  <% end -%>
+    <% end %>
 <% end -%>
 
 <h4> Find us on the map! </h4>
