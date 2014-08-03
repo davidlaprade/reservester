@@ -1,7 +1,7 @@
 class Reservation < ActiveRecord::Base
 
 # See http://stackoverflow.com/questions/2650897/in-rails-how-should-i-implement-a-status-field-for-a-tasks-app-integer-or-enu#2651261
-STATUSES = ['pending', 'approved']
+STATUSES = ['pending', 'approved', 'rejected']
 validates_inclusion_of :status, :in => STATUSES,
           :message => "{{value}} must be in #{STATUSES.join ','}"
 

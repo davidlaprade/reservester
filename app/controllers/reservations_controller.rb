@@ -19,6 +19,16 @@ before_filter :assign_restaurant
 		redirect_to @restaurant
 	end
 
+	def reject
+		@reservation = Reservation.find(params[:id])
+		@restaurant = @reservation.restaurant
+		@reservation.status = "rejected"
+		if current_user == @restaurant.owner
+			@reservation.save
+		end
+		redirect_to @restaurant
+	end
+
 	def create
 		@reservation = Reservation.new(reservation_params)
 		@reservation.email = current_user.email

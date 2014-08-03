@@ -65,7 +65,7 @@
 </dl>
 
 <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
-  <h3> Reservations </h3>
+  <h3> Pending Reservations </h3>
   <% if !(@reservations.present?) -%>
     <table class="table table-striped">
       <thead>
@@ -91,7 +91,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @reservations.each do |reservation| %>
+        <% @reservations.where(status: 'pending').each do |reservation| %>
           <tr>
             <td><%= reservation.reserved_by.name %></td>
             <td><%= reservation.email %></td>
@@ -102,9 +102,8 @@
               <%= link_to t('Approve'), approve_restaurant_reservation_path(@restaurant.id, reservation.id),
               :method => :post,
               :class => 'btn btn-mini btn-success' %>
-              <%= link_to t('Reject'),
-              restaurant_reservation_path(@restaurant.id, reservation),
-              :method => :delete,
+              <%= link_to t('Reject'), reject_restaurant_reservation_path(@restaurant.id, reservation.id),
+              :method => :post,
               :class => 'btn btn-mini btn-danger' %>
             </td>
           </tr>

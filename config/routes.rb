@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :reservations do
         member do
           post 'approve'
+          post 'reject'
         end
       end
     end
