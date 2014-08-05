@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
 	def new
 		@restaurant = Restaurant.new
 		@restaurant.user = current_user
+		@restaurant.fix_times
 	end
 
 	def update

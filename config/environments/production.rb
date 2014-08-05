@@ -1,3 +1,5 @@
+# to get the stylesheets on Heroku, follow: http://stackoverflow.com/questions/16271696/cant-get-css-working-on-heroku-using-rails-4-with-bootstrap-saas-gem
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
