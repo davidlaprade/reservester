@@ -38,9 +38,8 @@
 
     <%= javascript_include_tag "application" %>
   </head>
-  <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
-
-
+  <body>
+  <!-- navigation bar, fixed to the top so it follows the user as he/she scrolls -->
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -71,6 +70,8 @@
       </div>
     </div>
 
+
+
     <div class="container-fluid">
       <div class="row-fluid">
         <!-- <div class="span3"> -->
@@ -83,7 +84,7 @@
             </ul> -->
           <!-- </div>/.well  -->
         <!-- </div>/span -->
-        <div class="span9">
+        <div class="span12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
