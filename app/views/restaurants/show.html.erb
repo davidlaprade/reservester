@@ -126,17 +126,21 @@
 
 <div class="form-actions">
   <% if current_user.present? && current_user.patron? -%>
-    <%= link_to t('Book Table'),
-                new_restaurant_reservation_path(@restaurant), :class => 'btn btn-primary' %>
-    <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
+      <a class="btn btn-primary" data-method="GET" href=<%= new_restaurant_reservation_path(@restaurant) %> >
+            <i class="icon-calendar icon-white"></i> Book Table</a>
 
-      <%= link_to t("Favorite"), favorite_restaurant_path(@restaurant.id), :class => 'btn btn-success', :method => 'POST' %>
+    <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
+      <a class="btn btn-success" data-method="POST" href=<%= favorite_restaurant_path(@restaurant.id) %> >
+            <i class="icon-star icon-white"></i> Favorite</a>
+
     <% else %>
-      <%= link_to t("Unfavorite"), unfavorite_restaurant_path(@restaurant.id), :method => 'POST', :class => 'btn btn-warning' %>
+      <a class="btn btn-warning" data-method="POST" href=<%= unfavorite_restaurant_path(@restaurant.id) %> >
+            <i class="icon-star-empty icon-white"></i> Unfavorite</a>
+
     <% end %>
   <% end -%>
+  <a class="btn" href=<%= restaurants_path %> ><i class="icon-home"></i></a>
 
-  <%= link_to t("Home"), restaurants_path, :class => 'btn' %>
   <%= link_to t("Browse by Categories"), categories_path, :class => 'btn' %>
 
 <!-- http://getbootstrap.com/components/#glyphicons-how-to-use -->
