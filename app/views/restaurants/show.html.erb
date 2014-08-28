@@ -3,15 +3,12 @@
 
 <header class="jumbotron subhead" id="overview" style="padding-top:40px">
   <div class="container">
-    <h2><%= @restaurant.name %>.<p class="lead"><i><%= @restaurant.description %>.</i></p></h2>
+    <h2 style="color:white"><%= @restaurant.name %>.<p class="lead"><i><%= @restaurant.description %>.</i></p></h2>
   </div>
 </header>
 
 <div class="row">
-  <div class="span4">
-      <img src=<%= @restaurant.image_url(:masthead).to_s %> class="img-polaroid">
-  </div>
-  <div class="span3">
+  <div class="span3" style="color:white">
         <dt><strong>Categories:</strong></dt>
           <% if !(@restaurant.categories.present?) %>
             <dd>Presently Uncategorized</dd>
@@ -26,7 +23,8 @@
             <% end -%>
             </dd>
           <% end %>
-
+        <dt><strong>Address:</strong></dt>
+        <dd><%= @restaurant.address %></dd>
         <dt><strong>Phone:</strong></dt>
         <dd><%= @restaurant.phone %></dd>
         <dt><strong>Hours:</strong></dt>
@@ -54,13 +52,96 @@
           <dd><%= "Sundays - #{@restaurant.sunday_open_at.strftime("%I:%M %p")} to 
                 #{@restaurant.sunday_close_at.strftime("%I:%M %p")}" %></dd> 
         <% end %>      
-    </div>
-    <div class="row5">
-        <dt><strong>Address:</strong></dt>
-        <dd><%= @restaurant.address %></dd>
+
         <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=250x200&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}" %>
     </div>
-  </div>
+    <div class="row9" style="color:white">
+      <div class="container">
+          <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
+            <h3> Pending Reservations </h3>
+            <% if !(@reservations.where(status: 'pending').present?) -%>
+              <table class="table table-striped">
+                <thead>
+                  <tr></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>You have no pending reservations<td>
+                  </tr>
+                </tbody>
+              </table>
+            <% else -%>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th><%= model_class.human_attribute_name(:name) %></th>
+                    <th><%= model_class.human_attribute_name(:email) %></th>
+                    <th><%= model_class.human_attribute_name(:day) %></th>
+                    <th><%= model_class.human_attribute_name(:time) %></th>
+                    <th><%= model_class.human_attribute_name(:message) %></th>
+                    <th><%= model_class.human_attribute_name(:status) %></th>
+                    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @reservations.where(status: 'pending').each do |reservation| %>
+                    <tr>
+                      <td><%= reservation.reserved_by.name %></td>
+                      <td><%= reservation.email %></td>
+                      <td><%= reservation.day %></td>
+                      <td><%= reservation.time_and_date.strftime("%I:%M %p") %></td>
+                      <td><%= reservation.message %></td>
+                      <td><%= reservation.status %></td>
+                      <td>
+                        <%= link_to t('Approve'), approve_restaurant_reservation_path(@restaurant.id, reservation.id),
+                        :method => :post,
+                        :class => 'btn btn-mini btn-success' %>
+                        <%= link_to t('Reject'), reject_restaurant_reservation_path(@restaurant.id, reservation.id),
+                        :method => :post,
+                        :class => 'btn btn-mini btn-danger' %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <% end %>
+          <% end -%>
+        </div>
+
+
+          <div class="form-actions row3">
+            <% if current_user.present? && current_user.patron? -%>
+                <a class="btn btn-primary" data-method="GET" href=<%= new_restaurant_reservation_path(@restaurant) %> >
+                      <i class="icon-calendar icon-white"></i> Book Table</a>
+
+              <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
+                <a class="btn btn-success" data-method="POST" href=<%= favorite_restaurant_path(@restaurant.id) %> >
+                      <i class="icon-star icon-white"></i> Favorite</a>
+
+              <% else %>
+                <a class="btn btn-warning" data-method="POST" href=<%= unfavorite_restaurant_path(@restaurant.id) %> >
+                      <i class="icon-star-empty icon-white"></i> Unfavorite</a>
+
+              <% end %>
+            <% end -%>
+            <a class="btn" href=<%= restaurants_path %> ><i class="icon-home"></i></a>
+
+            <%= link_to t("Browse by Categories"), categories_path, :class => 'btn' %>
+
+
+            <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_restaurant_path(@restaurant), :class => 'btn' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        restaurant_path(@restaurant),
+                        :method => 'delete',
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-danger' %>
+            <% end -%>
+
+          </div>
+              </div>
+            </div>
 
 
 
@@ -72,98 +153,10 @@
 
 
 
-<% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
-  <h3> Pending Reservations </h3>
-  <% if !(@reservations.where(status: 'pending').present?) -%>
-    <table class="table table-striped">
-      <thead>
-        <tr></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>You have no pending reservations<td>
-        </tr>
-      </tbody>
-    </table>
-  <% else -%>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:email) %></th>
-          <th><%= model_class.human_attribute_name(:day) %></th>
-          <th><%= model_class.human_attribute_name(:time) %></th>
-          <th><%= model_class.human_attribute_name(:message) %></th>
-          <th><%= model_class.human_attribute_name(:status) %></th>
-          <th><%=t '.actions', :default => t("helpers.actions") %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @reservations.where(status: 'pending').each do |reservation| %>
-          <tr>
-            <td><%= reservation.reserved_by.name %></td>
-            <td><%= reservation.email %></td>
-            <td><%= reservation.day %></td>
-            <td><%= reservation.time_and_date.strftime("%I:%M %p") %></td>
-            <td><%= reservation.message %></td>
-            <td><%= reservation.status %></td>
-            <td>
-              <%= link_to t('Approve'), approve_restaurant_reservation_path(@restaurant.id, reservation.id),
-              :method => :post,
-              :class => 'btn btn-mini btn-success' %>
-              <%= link_to t('Reject'), reject_restaurant_reservation_path(@restaurant.id, reservation.id),
-              :method => :post,
-              :class => 'btn btn-mini btn-danger' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-<% end -%>
 
 
-
-<div class="form-actions">
-  <% if current_user.present? && current_user.patron? -%>
-      <a class="btn btn-primary" data-method="GET" href=<%= new_restaurant_reservation_path(@restaurant) %> >
-            <i class="icon-calendar icon-white"></i> Book Table</a>
-
-    <% if !(current_user.favorites.find_by_id(@restaurant.id).present?) %>
-      <a class="btn btn-success" data-method="POST" href=<%= favorite_restaurant_path(@restaurant.id) %> >
-            <i class="icon-star icon-white"></i> Favorite</a>
-
-    <% else %>
-      <a class="btn btn-warning" data-method="POST" href=<%= unfavorite_restaurant_path(@restaurant.id) %> >
-            <i class="icon-star-empty icon-white"></i> Unfavorite</a>
-
-    <% end %>
-  <% end -%>
-  <a class="btn" href=<%= restaurants_path %> ><i class="icon-home"></i></a>
-
-  <%= link_to t("Browse by Categories"), categories_path, :class => 'btn' %>
-
-<!-- http://getbootstrap.com/components/#glyphicons-how-to-use -->
-<!-- Want this to link to stars create, at restaurants_stars_path -->
-<!-- <a href="">
-<span class="glyphicon glyphicon-search"></span>
-  <button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-star"></span>
-</button>
-</a> -->
-
-
-  <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_restaurant_path(@restaurant), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              restaurant_path(@restaurant),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-  <% end -%>
-
-</div>
-
+<script>
+  $.backstretch("<%= @restaurant.image %>", {fade: 750, duration: 6000});
+</script>
 
 
