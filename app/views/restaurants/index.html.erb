@@ -1,10 +1,10 @@
 <%- model_class = Restaurant -%>
 
-<header class="jumbotron subhead" id="overview" style="padding-top:40px">
+<header class="jumbotron subhead" id="overview" style="padding-top:40px;color:white">
 
   <div class="container">
     <h1>Your meal. Your choice.</h1>
-    <p class="lead"><i>Choose from reservations at any of the following world-class establishments</i></p>
+    <p class="lead"><i>Make reservations at any of the following world-class establishments</i></p>
   </div>
 </header>
 
@@ -70,18 +70,9 @@
             :class => 'btn btn-primary' %>
 <% end -%>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="jquery.backstretch.min.js"></script>
-
-
 <script>
-      $('.jumbotron subhead').backstretch([
-        
+  $.backstretch("<%= asset_path 'mugaritz_2014_rest_1.jpg' %>", {fade: 750, duration: 6000});
+</script>
 
-        "the-zea-restaurant_1.jpg",
-        ], {
-        fade: 750,
-        duration: 6000
-      });
-    </script>
-    <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; z-index: -999999; position: fixed; width: 1243px; height: 637px;"><img src="the-zea-restaurant_1.jpg" style="position: absolute; margin: 0px; padding: 0px; border: none; max-height: none; max-width: none; z-index: -999999; width: 1243px; height: 932.25px; left: 0px; top: -147.625px;"></div>
+
