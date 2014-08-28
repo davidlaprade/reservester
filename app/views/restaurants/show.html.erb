@@ -1,69 +1,76 @@
 <%- model_class = Restaurant -%>
 
-<div class="page-header">
-  <h1><%=t '@restaurant.name', :default => model_class.human_attribute_name(@restaurant.name).titleize %></h1>
-</div>
 
+<header class="jumbotron subhead" id="overview" style="padding-top:40px">
+  <div class="container">
+    <h2><%= @restaurant.name %>.<p class="lead"><i><%= @restaurant.description %>.</i></p></h2>
+  </div>
+</header>
 
+<div class="row">
+  <div class="span4">
+      <img src=<%= @restaurant.image_url(:masthead).to_s %> class="img-polaroid">
+  </div>
+  <div class="span3">
+        <dt><strong>Categories:</strong></dt>
+          <% if !(@restaurant.categories.present?) %>
+            <dd>Presently Uncategorized</dd>
+          <% else %>
+            <dd>
+            <% @restaurant.categories.each do |category| %>
+              <% if category == @restaurant.categories.last %>
+               <%= category.name %>
+              <% else %>
+               <%= category.name + ", " %>
+              <% end -%>
+            <% end -%>
+            </dd>
+          <% end %>
 
-<%= image_tag @restaurant.image_url(:masthead).to_s %>
-
-
-<dl class="dl-horizontal">
-  <dd></dd>
-  <dt><strong><%= model_class.human_attribute_name(:restaurant_name) %>:</strong></dt>
-  <dd><%= @restaurant.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:categories) %>:</strong></dt>
-    <% if !(@restaurant.categories.present?) %>
-      <dd>Presently Uncategorized</dd>
-    <% else %>
-      <dd>
-      <% @restaurant.categories.each do |category| %>
-        <% if category == @restaurant.categories.last %>
-         <%= category.name %>
+        <dt><strong>Phone:</strong></dt>
+        <dd><%= @restaurant.phone %></dd>
+        <dt><strong>Hours:</strong></dt>
+        <% if @restaurant.weekday_open_at == nil %>
+          <dd><%= "Weekdays - Closed" %></dd>
         <% else %>
-         <%= category.name + ", " %>
-        <% end -%>
-      <% end -%>
-      </dd>
-    <% end %>
-  </dd>
-  <dt><strong><%= model_class.human_attribute_name(:owner_name) %>:</strong></dt>
-  <dd><%= User.find_by_id(@restaurant.user_id).name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @restaurant.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @restaurant.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
-  <dd><%= @restaurant.phone %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:hours) %>:</strong></dt>
-  <% if @restaurant.weekday_open_at == nil %>
-    <dd><%= "Weekdays - Closed" %></dd>
-  <% else %>
-    <dd><%= "Weekdays - #{@restaurant.weekday_open_at.strftime("%I:%M %p")} to 
-          #{@restaurant.weekday_close_at.strftime("%I:%M %p")}" %></dd>
-  <% end %>
-  <% if @restaurant.friday_open_at == nil %>
-    <dd><%= "Fridays - Closed" %></dd>
-  <% else %>
-    <dd><%= "Fridays - #{@restaurant.friday_open_at.strftime("%I:%M %p")} to 
-          #{@restaurant.friday_close_at.strftime("%I:%M %p")}" %></dd>
-  <% end %>
-  <% if @restaurant.saturday_open_at == nil %>
-    <dd><%= "Saturdays - Closed" %></dd>
-  <% else %>
-    <dd><%= "Saturdays - #{@restaurant.saturday_open_at.strftime("%I:%M %p")} to 
-          #{@restaurant.saturday_close_at.strftime("%I:%M %p")}" %></dd>
-  <% end %>
-  <% if @restaurant.sunday_open_at == nil %>
-    <dd><%= "Sundays - Closed" %></dd>
-  <% else %>
-    <dd><%= "Sundays - #{@restaurant.sunday_open_at.strftime("%I:%M %p")} to 
-          #{@restaurant.sunday_close_at.strftime("%I:%M %p")}" %></dd> 
-  <% end %>      
-  <dt><strong><%= model_class.human_attribute_name(:favorited_by) %>:</strong></dt>
-  <dd><%= @restaurant.favorited_by.count %></dd>
-</dl>
+          <dd><%= "Weekdays - #{@restaurant.weekday_open_at.strftime("%I:%M %p")} to 
+                #{@restaurant.weekday_close_at.strftime("%I:%M %p")}" %></dd>
+        <% end %>
+        <% if @restaurant.friday_open_at == nil %>
+          <dd><%= "Fridays - Closed" %></dd>
+        <% else %>
+          <dd><%= "Fridays - #{@restaurant.friday_open_at.strftime("%I:%M %p")} to 
+                #{@restaurant.friday_close_at.strftime("%I:%M %p")}" %></dd>
+        <% end %>
+        <% if @restaurant.saturday_open_at == nil %>
+          <dd><%= "Saturdays - Closed" %></dd>
+        <% else %>
+          <dd><%= "Saturdays - #{@restaurant.saturday_open_at.strftime("%I:%M %p")} to 
+                #{@restaurant.saturday_close_at.strftime("%I:%M %p")}" %></dd>
+        <% end %>
+        <% if @restaurant.sunday_open_at == nil %>
+          <dd><%= "Sundays - Closed" %></dd>
+        <% else %>
+          <dd><%= "Sundays - #{@restaurant.sunday_open_at.strftime("%I:%M %p")} to 
+                #{@restaurant.sunday_close_at.strftime("%I:%M %p")}" %></dd> 
+        <% end %>      
+    </div>
+    <div class="row5">
+        <dt><strong>Address:</strong></dt>
+        <dd><%= @restaurant.address %></dd>
+        <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=250x200&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}" %>
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+
+
+
+
 
 <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) -%>
   <h3> Pending Reservations </h3>
@@ -115,15 +122,7 @@
     <% end %>
 <% end -%>
 
-<h4> Find us on the map! </h4>
-<div class="form-group">
-    <div class="col-sm-10">
-      <p class="form-control-static">
-        <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=400x400&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}"
-        %>
-      </p>
-    </div>
-  </div>
+
 
 <div class="form-actions">
   <% if current_user.present? && current_user.patron? -%>

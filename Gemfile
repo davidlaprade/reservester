@@ -7,6 +7,8 @@ gem 'rails', '4.1.2'
 
 # to use Chosen for drop-down menus
 gem 'chosen-rails'
+# to generate backstretches in the views
+gem 'backstretch-rails'
 
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets

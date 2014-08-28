@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.backstretch
 //= require chosen-jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
