@@ -1,67 +1,69 @@
 <%- model_class = User -%>
-<div class="page-header">
-  <h1>Account Info</h1>
-</div>
+<div class="container" style="margin-top: 30px; margin-top: 7vh">
+  <div class="page-header">
+    <h1>Account Info</h1>
+  </div>
 
-<dl class="dl-horizontal">
-  <dd></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @user.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @user.email %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
-  <dd><%= @user.role %></dd>
-  <% if current_user.present? && current_user.owner? %>
-    <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
-    <% if current_user.restaurants.present? %>
-    	<% @user.restaurants.each do |restaurant| %>
-        <tr>
-          <dd><%= restaurant.name %></dd>
-        </tr>
-      <% end -%>
-    <% else %>
-      <dd><%= "You have no restaurants!" %></dd>
-    <% end %>
-  <% end %>  
-</dl>
-
-<% if current_user.owner? %>
-    <h4><%= "Approved Reservations" %></h4>
-      <table class="table table-striped">
-        <thead>
+  <dl class="dl-horizontal">
+    <dd></dd>
+    <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+    <dd><%= @user.name %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+    <dd><%= @user.email %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:type) %>:</strong></dt>
+    <dd><%= @user.role %></dd>
+    <% if current_user.present? && current_user.owner? %>
+      <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
+      <% if current_user.restaurants.present? %>
+      	<% @user.restaurants.each do |restaurant| %>
           <tr>
-            <th><%= model_class.human_attribute_name(:name_on_reservation) %></th>
-            <th><%= model_class.human_attribute_name(:restaurant) %></th>          
-            <th><%= model_class.human_attribute_name(:email) %></th>
-            <th><%= model_class.human_attribute_name(:day) %></th>
-            <th><%= model_class.human_attribute_name(:time) %></th>
-            <th><%= model_class.human_attribute_name(:message) %></th>
-            <th><%= model_class.human_attribute_name(:status) %></th>
+            <dd><%= restaurant.name %></dd>
           </tr>
-        </thead>
-        <tbody>
-          <% current_user.restaurants.order(:name).each do |restaurant| %>
-            <% if restaurant.reservations.where(status: 'approved').present? %>
-              <% restaurant.reservations.where(status: 'approved').order(:day).each do |reservation| %>
-                <tr>
-                  <td><%= reservation.reserved_by.name %></td>
-                  <td><%= reservation.restaurant.name %></td>             
-                  <td><%= reservation.email %></td>
-                  <td><%= reservation.day %></td>
-                  <td><%= reservation.time_and_date.strftime("%I:%M %p") %></td>
-                  <td><%= reservation.message %></td>
-                  <td><%= reservation.status %></td>
-                </tr>
+        <% end -%>
+      <% else %>
+        <dd><%= "You have no restaurants!" %></dd>
+      <% end %>
+    <% end %>  
+  </dl>
+
+  <% if current_user.owner? %>
+      <h4><%= "Approved Reservations" %></h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:name_on_reservation) %></th>
+              <th><%= model_class.human_attribute_name(:restaurant) %></th>          
+              <th><%= model_class.human_attribute_name(:email) %></th>
+              <th><%= model_class.human_attribute_name(:day) %></th>
+              <th><%= model_class.human_attribute_name(:time) %></th>
+              <th><%= model_class.human_attribute_name(:message) %></th>
+              <th><%= model_class.human_attribute_name(:status) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% current_user.restaurants.order(:name).each do |restaurant| %>
+              <% if restaurant.reservations.where(status: 'approved').present? %>
+                <% restaurant.reservations.where(status: 'approved').order(:day).each do |reservation| %>
+                  <tr>
+                    <td><%= reservation.reserved_by.name %></td>
+                    <td><%= reservation.restaurant.name %></td>             
+                    <td><%= reservation.email %></td>
+                    <td><%= reservation.day %></td>
+                    <td><%= reservation.time_and_date.strftime("%I:%M %p") %></td>
+                    <td><%= reservation.message %></td>
+                    <td><%= reservation.status %></td>
+                  </tr>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
-      </tr>
-<% end %>
+          </tbody>
+        </table>
+        </tr>
+  <% end %>
 
 
-<div class="form-actions">
-  <%= link_to t('home'),
-              restaurants_path, :class => 'btn'  %>
+  <div class="form-actions">
+    <a href=<%= restaurants_path %> class="btn" role="button"><i class="icon-home"></i> Home</a>
+    <a href=<%= edit_user_registration_path %> class="btn" role="button"><i class="icon-user"></i> Edit My Account</a>
+  </div>
 </div>
