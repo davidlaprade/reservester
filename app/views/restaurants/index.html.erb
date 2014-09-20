@@ -28,9 +28,9 @@
         <td>
           <% restaurant.categories.each do |category| %>
             <% if category == restaurant.categories.last %>
-             <%= category.name %>
+            <span class="label label-warning"><%= category.name %></span>
             <% else %>
-             <%= category.name %></br>
+             <span class="label label-warning"><%= category.name %></span><br>
             <% end -%>
           <% end -%>
         </td>

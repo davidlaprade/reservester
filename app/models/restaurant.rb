@@ -26,7 +26,7 @@ class Restaurant < ActiveRecord::Base
 
 	def self.category_names
 		["Mexican", "Bar", "American", "Fine Dining", "Club", 
-			"Fast Food", "Chinese", "Italian", "French", "Bakery"]
+			"Fast Food", "Chinese", "Italian", "French", "Bakery", "Spanish", "Contemporary"]
 	end
 
 	# Want an owner attribute without adding a redundant table

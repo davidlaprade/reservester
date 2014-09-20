@@ -109,7 +109,7 @@
         </div>
 
 
-          <div class="form-actions row3">
+          <div class="form-actions">
             <% if current_user.present? && current_user.patron? -%>
                 <a class="btn btn-primary" data-method="GET" href=<%= new_restaurant_reservation_path(@restaurant) %> >
                       <i class="icon-calendar icon-white"></i> Book Table</a>
