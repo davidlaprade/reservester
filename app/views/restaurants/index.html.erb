@@ -1,11 +1,11 @@
 <%- model_class = Restaurant -%>
+<body>
 
-<header class="jumbotron subhead" style="padding-top:40px">
-  <div class="container" style="color:white">
-    <h1>Your meal. Your choice.</h1>
-    <p class="lead"><i>Make reservations at any of the following world-class establishments</i></p>
-  </div>
-</header>
+<div class="hero-unit" style="padding-top:70px">
+  <h1>Your meal. Your choice.</h1>
+  <p class="lead"><i>Make reservations at any of the following world-class establishments</i></p>
+</div>
+
 
 
 <table class="table table-bordered table-hover table-responsive" style="background-color:white;color:black">
@@ -68,7 +68,8 @@
             categories_path,
             :class => 'btn btn-primary' %>
 <% end -%>
-
+<br>
+</body>
 
 <script>
   $.backstretch("<%= asset_path 'the-zea-restaurant_1.jpg' %>", {fade: 750, duration: 6000});
