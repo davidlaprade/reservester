@@ -87,7 +87,7 @@ class RestaurantsController < ApplicationController
 		def restaurant_params
 			params.require(:restaurant).permit(:id, :name, :description, :address, :phone, :image, :category_ids,
 				:weekday_open_at, :weekday_close_at, :friday_close_at, :friday_open_at, :saturday_close_at, :saturday_open_at,
-				:sunday_close_at, :sunday_open_at)
+				:sunday_close_at, :sunday_open_at, :max_reservations)
 		end
 
 		def checkbox_params
