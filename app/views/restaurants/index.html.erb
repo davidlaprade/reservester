@@ -40,13 +40,11 @@
         <td>
             <% if (current_user.present?) && (current_user.owner?) && (current_user == restaurant.owner) -%>
               <a class="btn btn-success" href=<%= restaurant_path(restaurant) %> ><i class="icon-search icon-white"></i></a>
-              <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                          edit_restaurant_path(restaurant), :class => 'btn' %>
-              <%= link_to t('delete'),
-                          restaurant_path(restaurant),
-                          :method => :delete,
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-danger' %>
+
+              <a class="btn" href=<%= edit_restaurant_path(restaurant) %> ><i class="icon-pencil"></i></a>
+
+              <a class="btn btn-danger" href=<%=restaurant_path(restaurant)%> data-method='DELETE' data-confirm="Are you sure you want to delete this restaurant's profile?"><i class="icon-remove icon-white"></i></a>
+              
             <% else %>
               <a class="btn btn-success btn-large" href=<%= restaurant_path(restaurant) %> ><i class="icon-search icon-white"></i></a>
             <% end -%>
