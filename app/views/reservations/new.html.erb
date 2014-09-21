@@ -1,8 +1,8 @@
 <%- model_class = Reservation -%>
 <div style="margin-top: 50px; margin-top: 8vh">
 <% if @reservation.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h3>
+    <div class="alert alert-error">
+      <h4><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h3>
 
       <ul>
       <% @reservation.errors.full_messages.each do |message| %>

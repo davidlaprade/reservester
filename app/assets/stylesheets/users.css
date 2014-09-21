@@ -1,0 +1,30 @@
+.favorite { 
+   position: relative; 
+   display: inline-block;
+   margin-right: 15px;
+   margin-bottom: 15px;
+
+}
+
+.favorite img {
+	width: 200px;
+	height: 150px;
+   border-radius: 10px;
+   border: 2px solid gray;
+}
+
+.favorite img:hover {
+	opacity: 0.5
+}
+
+.favorite p {
+	color: white; 
+   position: absolute; 
+   left: 0;
+   bottom: 50px;
+   font: 20px; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 5px; 
+}
