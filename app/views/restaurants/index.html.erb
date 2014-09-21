@@ -15,8 +15,6 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:phone) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -35,8 +33,7 @@
           <% end -%>
         </td>
         <td><%= restaurant.description %></td>
-        <td><%= restaurant.address %></td>
-        <td><%= restaurant.phone %></td>
+
         <td>
             <% if (current_user.present?) && (current_user.owner?) && (current_user == restaurant.owner) -%>
               <a class="btn btn-success" href=<%= restaurant_path(restaurant) %> ><i class="icon-search icon-white"></i></a>
@@ -44,7 +41,7 @@
               <a class="btn" href=<%= edit_restaurant_path(restaurant) %> ><i class="icon-pencil"></i></a>
 
               <a class="btn btn-danger" href=<%=restaurant_path(restaurant)%> data-method='DELETE' data-confirm="Are you sure you want to delete this restaurant's profile?"><i class="icon-remove icon-white"></i></a>
-              
+
             <% else %>
               <a class="btn btn-success btn-large" href=<%= restaurant_path(restaurant) %> ><i class="icon-search icon-white"></i></a>
             <% end -%>
