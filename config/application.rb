@@ -12,7 +12,7 @@ end
 
 if Rails.env.production?
     require 'dotenv'
-    Dotenv.load ".env.local", ".env.#{Rails.env}" 
+    Dotenv.load 
 end
 
 # Require the gems listed in Gemfile, including any gems
