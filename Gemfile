@@ -52,6 +52,8 @@ gem 'pry'
 
 gem 'carrierwave'
 gem 'rmagick'
+gem 'fog', '> 1.0.0', :groups => [:production]
+
 
 gem 'devise'
 
