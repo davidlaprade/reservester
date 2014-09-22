@@ -1,6 +1,6 @@
 <%- model_class = Restaurant -%>
 
-
+<body>
 <div class="hero-unit" id="overview" style="margin-top: 60px; margin-top: 8vh; padding: 10px">
   <h2><%= @restaurant.name %>.</h2>
   <p class="lead"><i><%= @restaurant.description %>.</i></p>
@@ -126,10 +126,9 @@
   </div>
 </div>
 
-
+</body>
 
 <script>
-  $.backstretch("<%= asset_path 'the-zea-restaurant_1.jpg' %>", {fade: 750, duration: 6000});
   $.backstretch("<%= @restaurant.image.to_s %>", {fade: 750, duration: 6000});
 </script>
 
