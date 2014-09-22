@@ -80,6 +80,7 @@
     <div class="controls">
       <%= f.file_field :image, :class => 'file_field' %>
     </div>
+      <%= image_tag @restaurant.image_url(:thumb).to_s, :style => 'border: 2px solid gray'%>
   </div>
     <div class="control-group">
       <%= f.label :category, :class => 'control-label' %>
