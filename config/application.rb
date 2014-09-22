@@ -10,10 +10,10 @@ if Rails.env.development?
     Dotenv.load ".env.local", ".env.#{Rails.env}" 
 end
 
-if Rails.env.production?
-    require 'dotenv'
-    Dotenv.load 
-end
+# if Rails.env.production?
+#     require 'dotenv'
+#     Dotenv.load 
+# end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
