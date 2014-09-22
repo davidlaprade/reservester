@@ -8,7 +8,7 @@
 
 Category.delete_all
 
-["Mexican", "Bar", "American", "Fine Dining", "Club", 
+["Contemporary", "Traditional", "Fine Dining", "Spanish", "Mexican", "Bar", "American",  
 	"Fast Food", "Chinese", "Italian", "French", "Bakery"].each do |category|
 	Category.find_or_create_by(name: category)
 end
