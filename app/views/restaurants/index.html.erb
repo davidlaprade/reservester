@@ -8,20 +8,24 @@
 
 
 
-<table class="table table-bordered table-hover table-responsive" style="background-color:white;color:black">
+<table class="table table-bordered table-hover table-responsive span9" style="background-color:white; background-image: linear-gradient(340deg, #000000, #5D5D5D); color:white">
   <thead>
     <tr>
-      <th><%= %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:category) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Description</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="font-size: 20px">
     <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= image_tag restaurant.image_url(:thumb).to_s %></td>
+      <tr class='clickableRow' href="<%= restaurant_path(restaurant) %>">
+        <td>
+          <a href="<%= restaurant_path(restaurant) %>">
+            <img class="table_photo" src="<%= restaurant.image_url(:thumb).to_s %>" />
+          </a>
+        </td>
         <td><%= restaurant.name %></td>
         <td>
           <% restaurant.categories.each do |category| %>
@@ -32,7 +36,7 @@
             <% end -%>
           <% end -%>
         </td>
-        <td><%= restaurant.description %></td>
+        <td><i><%= restaurant.description %></i></td>
 
         <td>
             <% if (current_user.present?) && (current_user.owner?) && (current_user == restaurant.owner) -%>
@@ -51,22 +55,30 @@
   </tbody>
 </table>
 
-<% if user_signed_in? && current_user.owner? -%>
-  <%= link_to t('Create_new_restaurant'),
-              new_restaurant_path,
-              :class => 'btn btn-primary' %>
-  <%= link_to t('Browse_by_categories'),
-        categories_path,
-        :class => 'btn btn' %>
-<% else -%>
-  <%= link_to t('Browse_by_categories'),
-            categories_path,
-            :class => 'btn btn-primary' %>
-<% end -%>
-<br>
+<div class="span8" id="button_bin">
+  <% if user_signed_in? && current_user.owner? -%>
+    <%= link_to t('Create_new_restaurant'),
+                new_restaurant_path,
+                :class => 'btn btn-primary' %>
+    <%= link_to t('Browse_by_categories'),
+          categories_path,
+          :class => 'btn btn' %>
+  <% else -%>
+    <%= link_to t('Browse_by_categories'),
+              categories_path,
+              :class => 'btn btn-warning btn-large', :style => 'color: black' %>
+  <% end -%>
+</div>
+
 </body>
 
 <script>
+jQuery(document).ready(function($) {
+      $(".clickableRow").click(function() {
+            window.document.location = $(this).attr("href");
+      });
+});
+
   $.backstretch("<%= asset_path 'the-zea-restaurant_1.jpg' %>", {fade: 750, duration: 6000});
 </script>
 

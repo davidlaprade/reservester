@@ -52,7 +52,6 @@
 
         <%= link_to image_tag("http://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_STATIC_MAPS_API_KEY']}&size=250x200&maptype=roadmap&markers=size:mid|color:red|#{@restaurant.address}"), "http://maps.google.com?q=#{@restaurant.address}", style: "border-radius: 10px"%>
     </div>
-
     <% if (current_user.present?) && (current_user.owner?) && (current_user == @restaurant.owner) %>
         <div class="span8" style="color:white; background-image: linear-gradient(10deg, #000000, #5D5D5D); border-radius: 10px; padding: 10px">
             <h3> Pending Reservations </h3>
@@ -96,8 +95,6 @@
                 <% end %>
         </div>
   <% end %> 
-
-
   <div class="span8 form-actions" style="color:white; background-image: linear-gradient(10deg, #000000, #5D5D5D); border-radius: 10px; padding: 10px">
             <% if current_user.present? && current_user.patron? -%>
                 <a class="btn btn-primary" data-method="GET" href=<%= new_restaurant_reservation_path(@restaurant) %> >

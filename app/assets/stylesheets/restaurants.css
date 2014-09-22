@@ -1,0 +1,24 @@
+.clickableRow:hover {
+	color: black;
+}
+
+.table_photo {
+	border-radius: 10px;
+	border: 2px solid white;
+}
+
+.table_photo:hover {
+	border: 2px solid gray;
+}
+
+#button_bin {
+	padding: 10px;
+	background-color: white; 
+	border-radius: 10px;
+	border: 2px solid gray;
+	background-image: linear-gradient(110deg, #000000, #5D5D5D);
+}
+
+#button_bin:hover {
+	border: 3px solid white;
+}
