@@ -16,4 +16,4 @@
 /tmp
 
 # Ignore .env file where I store my environment variables
-/.env
+.env
