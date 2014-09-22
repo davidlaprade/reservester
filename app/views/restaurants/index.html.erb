@@ -44,7 +44,7 @@
 
               <a class="btn" href=<%= edit_restaurant_path(restaurant) %> ><i class="icon-pencil"></i></a>
 
-              <a class="btn btn-danger" href=<%=restaurant_path(restaurant)%> data-method='DELETE' data-confirm="Are you sure you want to delete this restaurant's profile?"><i class="icon-remove icon-white"></i></a>
+              <a class="btn btn-danger" data-confirm="Are you sure you want to delete this restaurant's profile?" href=<%=restaurant_path(restaurant)%> data-method='DELETE' ><i class="icon-remove icon-white"></i></a>
 
             <% else %>
               <a class="btn btn-success btn-large" href=<%= restaurant_path(restaurant) %> ><i class="icon-search icon-white"></i></a>
@@ -73,6 +73,8 @@
 </body>
 
 <script>
+// makes table rows clickable links
+// see: http://stackoverflow.com/questions/17147821/how-to-make-a-whole-row-in-a-table-clickable-as-a-link
 jQuery(document).ready(function($) {
       $(".clickableRow").click(function() {
             window.document.location = $(this).attr("href");

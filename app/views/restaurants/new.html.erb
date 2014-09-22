@@ -1,8 +1,8 @@
 <%- model_class = Restaurant -%>
 
 <% if @restaurant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+     <div class="alert alert-error">
+      <h3><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h3>
 
       <ul>
       <% @restaurant.errors.full_messages.each do |message| %>
@@ -12,8 +12,8 @@
     </div>
  <% end %>
 
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="page-header" style="margin-top: 50px; margin-top: 8vh">
+  <h1>New Restaurant</h1>
 </div>
 <%= render :partial => 'form' %>
 
