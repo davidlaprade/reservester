@@ -58,7 +58,10 @@
               <% end -%>
               <% if user_signed_in? -%>
 
-              	<li><a class="active" href=<%= my_favorites_path %> ><i class="icon-heart icon-white"></i> Favorites</a></li>   
+                <% if current_user.role=="patron" %>
+              	   <li><a class="active" href=<%= my_favorites_path %> ><i class="icon-heart icon-white"></i> Favorites</a></li> 
+                <% end %> 
+
               	<li><a class="active" href=<%= dashboard_path %> ><i class="icon-user icon-white"></i> Dashboard</a></li>  
 
                 <li><%= link_to "Log out", destroy_user_session_path, :method => :delete,
